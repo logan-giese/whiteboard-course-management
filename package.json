@@ -1,19 +1,46 @@
 {
-  "name": "whiteboard-course-managment-backend",
-  "version": "1.0.0",
-  "description": "for start up project",
-  "main": "app.js",
+  "name": "whiteboard-course-managment",
+  "version": "0.1.0",
+  "description": "Course management web app inspired by Blackboard, made for a computer science projects course",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.13.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/logan-giese/whiteboard-course-management.git"
   },
-  "author": "",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/logan-giese/whiteboard-course-management/issues"
-  },
-  "homepage": "https://github.com/logan-giese/whiteboard-course-management#readme"
+  }
 }
