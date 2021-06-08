@@ -1,9 +1,17 @@
+// Import React dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Import Firebase
+import firebase from './firebase.js';
+
+// Main app files
+import './index.css';
+import App from './App';
+
+
+// Render the app
 ReactDOM.render(
   <React.StrictMode>
     <App />
