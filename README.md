@@ -2,31 +2,28 @@
 Course management web application inspired by Blackboard, made for a computer science projects course
 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Starts a live-reloading development server.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches a test runner in interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the app for production to the `build` folder, optimizing the build for best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project Requirements
+
+ - Three user types: Admin, Professor, and Student
+ - The app is authenticated to differentiate between users and permissions
+ - Administrators can create courses and assign professors and students to courses
+ - Professors can post course content (lectures/resources/etc) and assignments
+ - Students can view course content and grades, and can post submissions to assignments
+ - The project must include automated testing
