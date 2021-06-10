@@ -12,7 +12,7 @@ function App() {
   return (
  <BrowserRouter>
  <div className = "Container">
- <img src={logo} className ="App-logo" alt ="logo" />
+ {/* <img src={logo} className ="App-logo" alt ="logo" /> */}
    <h1 className = "m-3 d-flex justify-content-center">OC BLACKBOARD</h1>
    
    <Navigation/>
