@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter , Route, Switch} from 'react-router-dom'
 import * as ReactBootStrap from 'react-bootstrap'
 import About from './components/About'
+import Profile from './components/Profile'
 import Courses from './components/Courses'
 import Home from './components/Home'
 import {Navigation} from './components/Navigation'
@@ -19,6 +20,7 @@ function App() {
    <Switch>
      <Route path = '/' component = {Home} exact />
      <Route path ='/about' component ={About}/>
+     <Route path ='/profile' component ={Profile}/>
      <Route Path ='/courses' component ={Courses}/>
    </Switch>
  </div>
