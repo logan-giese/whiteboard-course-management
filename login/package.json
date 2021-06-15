@@ -1,20 +1,15 @@
 {
-  "name": "whiteboard-course-managment",
+  "name": "login",
   "version": "0.1.0",
-  "description": "Course management web app inspired by Blackboard, made for a computer science projects course",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^4.6.0",
     "firebase": "^8.6.5",
     "react": "^17.0.2",
-    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -40,12 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/logan-giese/whiteboard-course-management.git"
-  },
-  "bugs": {
-    "url": "https://github.com/logan-giese/whiteboard-course-management/issues"
   }
 }

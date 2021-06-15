@@ -1,7 +1,7 @@
 // Import Firebase dependencies
 import firebase from "firebase/app";
+import "firebase/firestore";
 //import "firebase/auth";
-//import "firebase/firestore";
 
 // Firebase configuration (required to connect)
 const firebaseConfig = {
