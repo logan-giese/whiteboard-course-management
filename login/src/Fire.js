@@ -1,14 +1,15 @@
 import firebase from 'firebase';
-  // Your web app's Firebase configuration
+  // Web app's Firebase configuration
   var firebaseConfig = {
-    apiKey: "AIzaSyB1qWcH4VWELWY0AOqKeS712p_HNKWqpjc",
-    authDomain: "login-5b589.firebaseapp.com",
-    projectId: "login-5b589",
-    storageBucket: "login-5b589.appspot.com",
-    messagingSenderId: "795553293946",
-    appId: "1:795553293946:web:9f38627356546e65763dc3"
+    apiKey: "AIzaSyDwpAGRWo_GikLeCdhRPbxJBm1g-uwIq_M",
+    authDomain: "whiteboard-course-management.firebaseapp.com",
+    projectId: "whiteboard-course-management",
+    storageBucket: "whiteboard-course-management.appspot.com",
+    messagingSenderId: "215690108847",
+    appId: "1:215690108847:web:bcfbccc0fd574d4c05195a"
   };
   // Initialize Firebase
   const fire = firebase.initializeApp(firebaseConfig);
 
   export default fire;
+ 

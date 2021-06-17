@@ -8,24 +8,37 @@ const App = () => {
   const [user, setUser] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [hasAccount, setHasAccount] = useState(false);
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [hasAccount, setHasAccount] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  
   
   const clearInputs = () =>{
     setEmail('');
     setPassword('');
+    setConfirmPassword('')
   }
   const clearErrors = () =>{
     setEmailError('');
     setPasswordError('');
+    setConfirmPasswordError('')
   }
 const handleLogin = () =>{
+  setLoading(true)
   clearErrors();
   fire
   .auth()
-  .signInWithEmailAndPassword(email, password)
+  .signInWithEmailAndPassword(email, password).then(()=>{
+    setLoading(false)
+    clearInputs()
+  })
   .catch(err =>{
+    setLoading(false)
     switch(err.code){
       case "auth/invalid-email":
       case "auth/user-disabled":
@@ -37,13 +50,35 @@ const handleLogin = () =>{
         break;
     }
   });
+  
+
 }
+
+const validateConfirmPassword=(password,confirmPassword )=>{
+  if(password==confirmPassword){
+    return true
+  }
+  else{
+    setConfirmPasswordError("Password doesn't match")
+    return false
+  }
+}
+
 const handlesignUp = () =>{
+  setLoading(true)
+  if(!(validateConfirmPassword(password, confirmPassword))){
+    setLoading(false)
+    return
+  }
   clearErrors();
   fire
   .auth()
-  .createUserWithEmailAndPassword(email, password)
+  .createUserWithEmailAndPassword(email, password).then(()=>{
+    setLoading(false)
+    clearInputs()
+  })
   .catch(err =>{
+    setLoading(false)
     switch(err.code){
       case "auth/email-already-in-use":
       case "auth/invalid-email":
@@ -54,6 +89,17 @@ const handlesignUp = () =>{
         break;
     }
   });
+ 
+
+}
+
+const resetPassword=(email)=>{
+  setLoading(true)
+   return fire.auth().sendPasswordResetEmail(email).then(()=>{ 
+    clearErrors()
+    clearInputs()
+    setLoading(false)
+  })
 }
 const handleLogout = ()=>{
   fire.auth().signOut();
@@ -88,9 +134,16 @@ useEffect(() => {
      setHasAccount = {setHasAccount}
      emailError = {emailError}
      passwordError = {passwordError}
-
+     confirmPassword={confirmPassword}
+     setConfirmPassword={setConfirmPassword}
+     confirmPasswordError={confirmPasswordError}
+     forgotPassword={forgotPassword}
+     setForgotPassword={setForgotPassword}
+     resetPassword={resetPassword}
+     loading={loading}
+     setLoading={setLoading}
      />
-      )};
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
+  
 }
 
 button {
@@ -10,7 +11,7 @@ button {
   outline: none;
   width: 100%;
   padding: 15px 0;
- 
+  transition: 0.4s;
   color: rgb(233, 229, 229);
   font-size: 16px;
   letter-spacing: 1px;
@@ -20,14 +21,23 @@ button {
 
 .login {
   width: 100%;
-  min-height: 100vh;
+  min-height:100vh;
   padding: 0 20px;
-  background:rgb(44, 3, 3);
+  /* background: #DC2424; 
+ background: -webkit-linear-gradient(to right, #4A569D, #DC2424); 
+  background: linear-gradient(to right, #4A569D, #DC2424);  */
+  
+  background-image: url(./Images/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  
   display: flex;
 }
 .head{
-  color:#350707;
+  color:#311b1b;
   font-size: 30px;
+  font-style:italic;
   margin-bottom: 40px;
 }
 
@@ -40,12 +50,14 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgb(148, 136, 128);
-  box-shadow: 0 50px 70px -20px rgba(98, 94, 94, 0.8);
+  background: -webkit-linear-gradient(to right, rgba(233, 190, 155, 0.911), #ffffff); 
+  background: linear-gradient(to right, rgb(204, 178, 138), #e9dbcf);
+ 
 }
 
+
 .login .loginContainer label {
-  color:#1b0505;
+  color:#000000;
   margin: 14px 0;
   display: block;
   font-size: 22px;
@@ -54,12 +66,13 @@ button {
 
 .login .loginContainer input {
   width: 100%;
-  border: none;
+  border-color: rgb(19, 18, 18);
   outline: none;
   font-size: 19px;
   padding: 10px;
-  background: rgba(167, 28, 28, 0.1);
-  color: rgb(91, 79, 79);
+  background: -webkit-linear-gradient(to right, rgba(233, 190, 155, 0.911), #ffffff); 
+  background: linear-gradient(to right, rgb(204, 178, 138), #e9dbcf);
+  color: rgb(8, 8, 8);
   letter-spacing: 1px;
 }
 
@@ -71,11 +84,11 @@ button {
 .login .loginContainer .btnContainer p {
   margin: 14px 0 0 0;
   text-align: right;
-  color: whitesmoke;
+  color: rgb(30, 28, 28);
 }
 
 .login .loginContainer .btnContainer p span {
-  color:whitesmoke;
+  color:#a52a2a;;
   font-weight: 500;
   letter-spacing: 0.5px;
   margin-left: 5px;
@@ -84,7 +97,7 @@ button {
 }
 
 .login .loginContainer .btnContainer p span:hover {
-  color: red;
+  color: #fa0303;
 }
 
 .login .loginContainer .errorMsg {
@@ -120,4 +133,17 @@ button {
   width: 86px;
   padding: 8px 0;
   background: #3a2b58;
+}
+
+.resetbtn{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+button:hover{
+  background: #DC2424;  
+  background: -webkit-linear-gradient(to right, rgba(252, 250, 249, 0.911), #161414); 
+  background: linear-gradient(to right, rgb(230, 227, 222), #181716);
+  color: white;
+
 }
