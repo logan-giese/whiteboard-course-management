@@ -6,6 +6,7 @@ import About from './components/About'
 import Profile from './components/Profile'
 import Courses from './components/Courses'
 import Home from './components/Home'
+import ServiceTestPage from './components/test/ServiceTestPage'
 import {Navigation} from './components/Navigation'
 import logo from './logo.svg';
 
@@ -18,10 +19,11 @@ function App() {
    
    <Navigation/>
    <Switch>
-     <Route path = '/' component = {Home} exact />
-     <Route path ='/about' component ={About}/>
-     <Route path ='/profile' component ={Profile}/>
-     <Route Path ='/courses' component ={Courses}/>
+     <Route path='/' component={Home} exact />
+     <Route path='/about' component={About} />
+     <Route path='/profile' component={Profile} />
+     <Route path='/courses' component={Courses} />
+     <Route path='/service-tests' component={ServiceTestPage} />
    </Switch>
  </div>
  </BrowserRouter>
