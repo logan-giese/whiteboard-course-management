@@ -2,9 +2,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// Import Firebase
-import firebase from './firebase.js';
 
 // Main app files
 import './index.css';

@@ -1,6 +1,9 @@
-import React from 'react'
+import React from 'react';
 
- function About() {
-  return <h1>About page  </h1>
+function About() {
+  return <div className="content">
+      <h1>About page</h1>
+    </div>;
 }
+
 export default About;
