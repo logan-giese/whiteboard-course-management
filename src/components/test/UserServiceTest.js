@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserService from '../services/userService.js';
+import UserService from '../../services/userService.js';
 
 // Full user service test component
 const UserServiceTest = () => {
