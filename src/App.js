@@ -17,6 +17,7 @@ import CourseCards from './components/CourseCards'
 import  Dashboard  from './components/DashboardSidebar';
 import SelectedCourseDash from './components/SelectedCourseDash';
 import StudCourse from './components/StudCourse';
+import Assignment from './components/Assignment';
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
      <Route path ='/messages' component ={Messages}/>
      <Route path='/service-tests' component={ServiceTestPage} />
      <Route path='/selectedCourse' component={SelectedCourseDash} />
+     <Route path='/courseAssignment' component={Assignment} />
+
    </Switch>
  </div>
  </BrowserRouter>

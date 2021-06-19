@@ -1,250 +1,107 @@
-import React, {useState, useEffect}from 'react';
-import clsx from 'clsx';
-import {alpha, makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
-import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import Box from '@material-ui/core/Box'
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MailIcon from '@material-ui/icons/Mail';
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import NavItem from './NavItem';
+import Box from '@material-ui/core/Box'
+import homePage from "./Home"
 
 const drawerWidth = 240;
 const items = [
   {
     href: '/',
     
-    title: 'SelectedCourse'
+    title: 'Selected COurse'
   },
   {
-    href: '/',
-  title: 'Announcement'
-  },
-  {
-    href: '/',
+    href: '/profile',
     
-    title: 'Syllabus'
+    title: 'Announcements'
   },
   {
-    href: '/studentCourseView',
+    href: '/',
     
     title: 'Course Content'
   },
   {
     href: '/',
-   
-    title: 'Disscussions'
+    
+    title: 'Discussions'
   },
+ 
   {
     href: '/',
     
-    title: 'My Grades'
+    title: 'My Grade'
   },
-//   {
-//     href: '/login',
-    
-//     title: 'A'
-//   },
-//   {
-//     href: '/register',
-//     icon: NoteIcon,
-//     title: 'Tools'
-//   },
-
-//   {
-//     href: '/404',
-//     icon: ExitToAppIcon,
-//     title: 'Log Out'
-//   }
+ 
 ];
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
   },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.secondary.dark, 0.15),
-    '&:hover': {
-      backgroundColor: alpha(theme.palette.secondary.dark, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-  sectionDesktop: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  sectionMobile: {
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
   },
 }));
 
-export default function SelectedCourseDash(props) {
-    const initialvalues ={
-        title: "",
-        course_code: "",
-        semester_code : "",
-        session_code: "",
-      } 
-      var [values, setValues] = useState({
-        title: "",
-        course_code: "",
-        semester_code : "",
-        session_code: "",
-      })
+function ResponsiveDrawer(props) {
+  const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  useEffect(()=>{
-    if(props.currentId ==='')
-    setValues({
-        ...initialvalues
-    })
-    else
-    setValues({
-        ...props.course[props.currentId]
-    })
-    
-},[props.currentId,props.course])
+  function homePage() {
+    return <homePage/>;
+  }
 
- 
-
- 
- 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="static"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-       
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        
-       
-          <Divider />
-        <Box sx={{ p: 2 }}>
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      
+      {/* <Box  display='flex' flex='1' justifyContent='space-around' style={{ height: '4vh' }}>
         <List>
           {items.map((item,index) => (
             <NavItem
@@ -252,14 +109,82 @@ export default function SelectedCourseDash(props) {
               key={index}
               title={item.title}
               
-              onClick={handleDrawerClose}
+              
             />
           ))}
         </List>
       </Box>
-       
-      </Drawer>
-     
+    */}
     </div>
   );
+
+  const container = window !== undefined ? () => window().document.body : undefined;
+
+  // return (
+    // <div className={classes.root}>
+    //   <CssBaseline />
+    //   <AppBar position="fixed" className={classes.appBar}>
+    //     <Toolbar>
+    //       <IconButton
+    //         color="inherit"
+    //         aria-label="open drawer"
+    //         edge="start"
+    //         onClick={handleDrawerToggle}
+    //         className={classes.menuButton}
+    //       >
+    //         <MenuIcon />
+    //       </IconButton>
+    //       <Typography variant="h6" noWrap>
+          
+    //       </Typography>
+    //     </Toolbar>
+    //   </AppBar>
+    //   <nav className={classes.drawer} aria-label="mailbox folders">
+    //     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+    //     <Hidden smUp implementation="css">
+    //       <Drawer
+    //         container={container}
+    //         containerstyle={{height: '10hv', top: 64}}
+    //         variant="temporary"
+    //         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+    //         open={mobileOpen}
+    //         onClose={handleDrawerToggle}
+    //         classes={{
+    //           paper: classes.drawerPaper,
+    //         }}
+    //         ModalProps={{
+    //           keepMounted: true, // Better open performance on mobile.
+    //         }}
+    //       >
+    //         {drawer}
+    //       </Drawer>
+    //     </Hidden>
+    //     <Hidden xsDown implementation="css">
+    //       <Drawer
+    //         classes={{
+    //           paper: classes.drawerPaper,
+    //         }}
+    //         variant="permanent"
+    //         open
+    //       >
+    //         {drawer}
+    //       </Drawer>
+    //     </Hidden>
+    //   </nav>
+    //   <main className={classes.content}>
+    //     <div className={classes.toolbar} />
+        
+    //   </main>
+    // </div>
+  // );
 }
+
+ResponsiveDrawer.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default ResponsiveDrawer;
