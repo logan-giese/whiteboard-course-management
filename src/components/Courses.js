@@ -1,5 +1,9 @@
 import React,{useState, useEffect} from 'react'
-import UserService from '../services/userService';
+import UserService from '../services/userService'
+import CreateIcon from '@material-ui/icons/Create';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Registering from "./Registering"
+
 
 function Courses() {
  
@@ -7,13 +11,15 @@ function Courses() {
     const [user,setUser] = useState([])
     const [currentId,setCurrentId]=useState('')
   
- 
+    UserService.getUsers().then((user)=>{setUser(user)});
   return (
+       
     <div className="table">
-        <button type="button" className="btn btn-primary" onClick={
+    
+        {/* <button type="button" className="btn btn-primary" onClick={
             async () => {
                 setUser(await UserService.getUsers());}}
-                >Get Users</button>    
+                >Get Users</button>     */}
     <table className ="table table-borderless table-stripped">
         <thead className="thead-light">
             <tr>
@@ -34,11 +40,10 @@ function Courses() {
                       <td>{user[id].email}</td>
                       <td>{user[id].role}</td>
                       <td>
-                            <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                    <i className ="fas fa-pencil-alt">
-                                        </i></a> 
+                      <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
+                                    <CreateIcon/></a> 
                                 <a className ='btn text-danger'>
-                                    <i className = 'fas fa-trash-alt'></i>
+                                   <DeleteIcon/>
                                 </a>
                         </td>
                         
