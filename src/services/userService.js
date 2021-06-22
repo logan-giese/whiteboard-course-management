@@ -33,6 +33,23 @@ const UserService = {
         return doc.id;
     },
     
+    // Update a user by ID, changing only the fields in the provided data object
+    // Example: updateUser(3, {first_name: 'Geoffrey'}) will only change the user's first name
+    // Returns whether it succeeded or not
+    updateUser: async (id, newData) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('users').doc(id);
+        await doc.update(newData);
+    },
+    
+    // Delete a user by ID
+    deleteUser: async (id) => {
+        const db = firebase.firestore();
+        
+        db.collection('users').doc(id).delete();
+    },
+    
 }
 
 export default UserService;
