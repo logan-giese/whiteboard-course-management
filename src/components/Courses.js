@@ -1,5 +1,5 @@
-import React,{useState, useEffect} from 'react'
-import UserService from '../services/userService'
+import React, {useState, useEffect} from 'react';
+import UserService from '../services/userService';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -8,25 +8,22 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Courseform from './Courseform'
+import Courseform from './Courseform';
 
 
 function Courses() {
  
 
-    const [user,setUser] = useState([])
-    const [currentId,setCurrentId]=useState('')
+    const [user, setUser] = useState([])
+    const [currentId, setCurrentId] = useState('')
     const [open, setOpen] = useState(false);
-    const[isLoaded,setLoaded] =useState(false)
     
-    useEffect(()=>{
-      if(!isLoaded){
-      UserService.getUsers().then((user)=>{setUser(user)});
-      }
-      setLoaded(true)
-
-      
-  },[])
+    useEffect(() => {
+      UserService.getUsers().then((users) => {
+        setUser(users);
+      });
+    }, []);
+    
     const handleClickOpen = () => {
    setOpen(true);
     };
@@ -42,25 +39,25 @@ function Courses() {
     })
     setCurrentId('')
    }
-  const addorEdit =e=>{
-    if(currentId ===''){
-//create function
-UserService.createUser(e).then(()=>{
-  console.log("created new item successfully!")
-  
-}).catch((e)=>{
-  console.log("failled to create a new user")
-});
-    } else 
-    //update
-    UserService.updateUser(currentId,e).then(()=>{
-      console.log("user Updated successfully")
-    }).catch((e)=>{
-      console.log("failed to Updated a user")
-    })
-    setCurrentId('')
+   const addorEdit = (e) =>{
+       if(currentId ===''){
+    //create function
+    UserService.createUser(e).then(()=>{
+      console.log("created new item successfully!")
 
-}
+    }).catch((e)=>{
+      console.log("failled to create a new user")
+    });
+        } else 
+        //update
+        UserService.updateUser(currentId,e).then(()=>{
+          console.log("user Updated successfully")
+        }).catch((e)=>{
+          console.log("failed to Updated a user")
+        })
+        setCurrentId('')
+
+    }
     
   return (
        
@@ -77,7 +74,7 @@ UserService.createUser(e).then(()=>{
           Add or Edit page
           </DialogContentText>
           
-          <Courseform {...({addorEdit, currentId, user})}/>
+        <Courseform {...({addorEdit, currentId, user})}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -107,9 +104,9 @@ UserService.createUser(e).then(()=>{
                       <td>{user[id].role}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={handleClickOpen(id)}/></a> 
+                                        <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
                                 <a className ='btn text-danger'>
-                                   <DeleteIcon onClick={handaledelete(id)}/>
+                                   <DeleteIcon onClick={() => handaledelete(id)}/>
                                 </a>
                         </td>
                         
