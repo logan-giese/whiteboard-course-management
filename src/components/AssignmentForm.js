@@ -16,7 +16,7 @@ const AssignmentForm =(props)=> {
         setValues({
             ...props.assignment[props.currentId]
         })
-
+    })
     const handleInputChnage = e=>{
         var {id, value} =e.target
         setValues({

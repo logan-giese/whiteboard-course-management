@@ -12,8 +12,6 @@ import AssignemntForm from './AssignmentForm';
 
 
 function Assignments() {
- 
-
     const [assignment, setAssignment] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [open, setOpen] = useState(false);
@@ -31,7 +29,7 @@ function Assignments() {
     const handleClose = () => {
       setOpen(false);
     };
-   const handaledelete =(id) =>{
+   const handleDelete =(id) =>{
     AssignmentService.deleteAssignment(id).then(()=>{
       
     }).catch((e)=>{
@@ -40,30 +38,28 @@ function Assignments() {
     setCurrentId('')
    }
    const addorEdit = (e) =>{
-       if(currentId ===''){
+    if(currentId ===''){
     //create function
-    AssignmentService.createAssignment(e).then(()=>{
-      console.log("created assignment")
+      AssignmentService.createAssignment(e).then(()=>{
+        console.log("created assignment")
 
-    }).catch((e)=>{
-      console.log("failed to create assignment")
-    });
-        } else 
-        //update
-        UserService.updateUser(currentId,e).then(()=>{
-          console.log("assignment created successfully")
+     }).catch((e)=>{
+        console.log("failed to create assignment")
+      });
+    } 
+    else 
+      //update
+      UserService.updateUser(currentId,e).then(()=>{
+        console.log("assignment created successfully")
         }).catch((e)=>{
           console.log("assignment creation failed")
         })
-        setCurrentId('')
-
+      setCurrentId('')
     }
     
   return (
        
     <div className="table">
-    
-    
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         AddUser
       </Button>
@@ -73,7 +69,6 @@ function Assignments() {
           <DialogContentText>
           Add or Edit page
           </DialogContentText>
-          
         <Courseform {...({addorEdit, currentId, user})}/>
         </DialogContent>
         <DialogActions>
@@ -86,15 +81,14 @@ function Assignments() {
     <table className ="table table-borderless table-stripped">
         <thead className="thead-light">
             <tr>
-                <th>Name</th>
-                <th>link to object</th>
+              <th>Name</th>
+              <th>link to object</th>
             </tr>
         </thead>
         <tbody>
-          {
-              
-              Object.keys(assignment).map(id =>{
-                  return < tr key={id}>
+          { 
+            Object.keys(assignment).map(id =>{
+              return < tr key={id}>
                       <td>{assignment[id].first_name}</td>
                       <td>{assignment[id].data}</td>
                       <td>
@@ -103,8 +97,7 @@ function Assignments() {
                                 <a className ='btn text-danger'>
                                    <DeleteIcon onClick={() => handaledelete(id)}/>
                                 </a>
-                        </td>
-                        
+                        </td>  
                   </tr>
               })
           }  
@@ -114,5 +107,4 @@ function Assignments() {
     
   )
 }
-
 export default Assignments
