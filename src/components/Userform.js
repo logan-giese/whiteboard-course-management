@@ -1,12 +1,12 @@
 import React ,{useState, useEffect} from 'react'
 
 
-const Courseform =(props)=> {
+const Userform =(props)=> {
     const initialvalues ={
-      title: "",
-      course_code: "",
-      semester_code : "",
-      session_code: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        role: 0,
     } 
     var [values, setValues] = useState({})
     useEffect(()=>{
@@ -16,10 +16,10 @@ const Courseform =(props)=> {
         })
         else
         setValues({
-            ...props.course[props.currentId]
+            ...props.user[props.currentId]
         })
         
-    },[props.currentId,props.course])
+    },[props.currentId,props.user])
 
     const handleInputChnage = e=>{
         var {name, value} =e.target
@@ -40,7 +40,7 @@ const Courseform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="Course title" name="title" value = {values.title} onChange ={ handleInputChnage}/>
+          <input className ="form-control" placeholder ="first name" name="first_name" value = {values.first_name} onChange ={ handleInputChnage}/>
       </div>
       <div className="form-row">
       <div className ="form-group input-group col-md-6">
@@ -50,7 +50,7 @@ const Courseform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="Course Code" name="course_code" value = {values.course_code}  onChange ={handleInputChnage}/>
+          <input className ="form-control" placeholder ="last name" name="last_name" value = {values.last_name}  onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group input-group col-md-6">
           <div className ="input-group-prepend">
@@ -59,11 +59,11 @@ const Courseform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="Semester Code" name="semester_code" value = {values.semester_code}
+          <input className ="form-control" placeholder ="Email" name="email" value = {values.email}
            onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group">
-          <input className ="form-control" placeholder ="Session Code" name="session_code" value={values.session_code} onChange ={ handleInputChnage}/>
+          <textarea className ="form-control" placeholder ="role" name="role" value={values.address } onChange ={ handleInputChnage}/>
       </div>
      
       </div>
@@ -76,4 +76,4 @@ const Courseform =(props)=> {
   );
 }
 
-export default Courseform
+export default Userform

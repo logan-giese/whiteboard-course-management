@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import courseService from '../services/courseService';
+import UserService from '../services/userService';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -8,19 +8,19 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Courseform from './Courseform';
+import Userform from './Userform';
 
 
-function Courses() {
+function Users() {
  
 
-    const [course, setCourse] = useState([])
+    const [user, setUser] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [open, setOpen] = useState(false);
     
     useEffect(() => {
-      courseService.getCourses().then((courses) => {
-        setCourse(courses);
+      UserService.getUsers().then((users) => {
+        setUser(users);
       });
     }, []);
     
@@ -33,7 +33,7 @@ function Courses() {
     };
    const handaledelete =(id) =>{
      
-    courseService.deleteCourse(id).then(()=>{
+    UserService.deleteUser(id).then(()=>{
       
     }).catch((e)=>{
       console.log(e)
@@ -43,16 +43,16 @@ function Courses() {
    const addorEdit = (e) =>{
        if(currentId ===''){
     //create function
-    courseService.createCourse(e).then(()=>{
+    UserService.createUser(e).then(()=>{
       console.log("created new item successfully!")
 
     }).catch((e)=>{
-      console.log("failled to create a new course")
+      console.log("failled to create a new user")
     });
         } else 
         //update
-        courseService.updateCourse(currentId,e).then(()=>{
-          console.log("course Updated successfully")
+        UserService.updateUser(currentId,e).then(()=>{
+          console.log("user Updated successfully")
         }).catch((e)=>{
           console.log(e)
         })
@@ -66,16 +66,16 @@ function Courses() {
     
     
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Course
+        AddUser
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">  Add or Edit Page</DialogTitle>
+        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
-       
+          Add or Edit page
           </DialogContentText>
           
-        <Courseform {...({addorEdit, currentId, course})}/>
+        <Userform {...({addorEdit, currentId, user})}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -87,22 +87,22 @@ function Courses() {
     <table className ="table table-borderless table-stripped">
         <thead className="thead-light">
             <tr>
-                <th>Title</th>
-                <th>Course Code</th>
-                <th>Semester Code</th>
-                <th>Session Code</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Role</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
           {
               
-              Object.keys(course).map(id =>{
+              Object.keys(user).map(id =>{
                   return < tr key={id}>
-                      <td>{course[id].title}</td>
-                      <td>{course[id].course_code}</td>
-                      <td>{course[id].semester_code}</td>
-                      <td>{course[id].session_code}</td>
+                      <td>{user[id].first_name}</td>
+                      <td>{user[id].last_name}</td>
+                      <td>{user[id].email}</td>
+                      <td>{user[id].role}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
                                         <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
@@ -121,4 +121,4 @@ function Courses() {
   )
 }
 
-export default Courses
+export default Users

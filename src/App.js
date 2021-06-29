@@ -3,11 +3,13 @@ import './App.css';
 import {BrowserRouter , Route, Switch} from 'react-router-dom'
 import * as ReactBootStrap from 'react-bootstrap'
 import About from './components/About'
+import Profile from './components/Profile'
 import Courses from './components/Courses'
 import Home from './components/Home'
 import ServiceTestPage from './components/test/ServiceTestPage'
 import {Navigation} from './components/Navigation'
 import logo from './logo.svg';
+import Users from './components/Users';
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
    <Switch>
      <Route path='/' component={Home} exact />
      <Route path='/about' component={About} />
+     <Route path='/profile' component={Profile} />
      <Route path='/courses' component={Courses} />
+     <Route path='/users' component={Users} />
      <Route path='/service-tests' component={ServiceTestPage} />
    </Switch>
  </div>
