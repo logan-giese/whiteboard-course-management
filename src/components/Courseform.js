@@ -8,7 +8,12 @@ const Courseform =(props)=> {
       semester_code : "",
       session_code: "",
     } 
-    var [values, setValues] = useState({})
+    var [values, setValues] = useState({
+      title: "",
+      course_code: "",
+      semester_code : "",
+      session_code: "",
+    })
     useEffect(()=>{
         if(props.currentId ==='')
         setValues({
@@ -30,6 +35,7 @@ const Courseform =(props)=> {
     const handleFormSubmit =e =>{
         e.preventDefault();
         props.addorEdit(values);
+        
     }
     return (
       <form autoComplete ="off" onSubmit ={handleFormSubmit}>

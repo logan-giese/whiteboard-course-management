@@ -8,7 +8,11 @@ const Userform =(props)=> {
         email: "",
         role: 0,
     } 
-    var [values, setValues] = useState({})
+    var [values, setValues] = useState({ 
+        first_name: "",
+    last_name: "",
+    email: "",
+    role: 0,})
     useEffect(()=>{
         if(props.currentId ==='')
         setValues({
