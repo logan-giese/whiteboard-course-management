@@ -49,7 +49,39 @@ const AssignmentService = {
         db.collection('courses').doc(courseId).collection('assignments').doc(assignmentId).delete();
     },
     
-    // TODO - handle assignment submissions fetch/update
+    // Get a specific student's submission to an assignment (or null if it doesn't exist)
+    getSubmission: async (courseId, assignmentId, studentId) => {
+        const db = firebase.firestore();
+        
+        const doc = await db.collection('courses').doc(courseId).collection('assignments').doc(assignmentId).get();
+        if (doc.exists) {
+            const submission = doc.data().submissions[studentId];
+            if (submission != undefined && submission != null)
+                return submission;
+        }
+        return null;
+    },
+    
+    // Set the data for a submission, or update it if it exists
+    // Example: If a submission exists, submissionData = {grade: 90} should work
+    setSubmission: async (courseId, assignmentId, studentId, submissionData) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('courses').doc(courseId).collection('assignments').doc(assignmentId);
+        await doc.update({
+            ['submissions.' + studentId]: submissionData
+        });
+    },
+    
+    // Delete a specific student's submission to an assignment
+    deleteSubmission: async (courseId, assignmentId, studentId) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('courses').doc(courseId).collection('assignments').doc(assignmentId);
+        await doc.update({
+            ['submissions.' + studentId]: firebase.firestore.FieldValue.delete()
+        });
+    },
     
 }
 
