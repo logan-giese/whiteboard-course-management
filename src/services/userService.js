@@ -49,7 +49,65 @@ const UserService = {
         db.collection('users').doc(id).delete();
     },
     
-    // TODO - handle assigned and enrolled courses
+    // Enroll a student in the given course if not enrolled already
+    enrollCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('users').doc(userId);
+        await doc.update({
+            enrolled_courses: firebase.firestore.FieldValue.arrayUnion(courseId)
+        });
+    },
+    
+    // Unenroll a student from the given course (remove it from their list of enrolled courses)
+    unenrollCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('users').doc(userId);
+        await doc.update({
+            enrolled_courses: firebase.firestore.FieldValue.arrayRemove(courseId)
+        });
+    },
+    
+    // Check if a student is enrolled in the given course
+    enrolledInCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = await db.collection('users').doc(userId).get();
+        if (doc.exists && doc.data().enrolled_courses?.includes(courseId))
+            return true;
+        return false;
+    },
+    
+    // Assign a professor to the given course if not assigned already
+    assignCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('users').doc(userId);
+        await doc.update({
+            assigned_courses: firebase.firestore.FieldValue.arrayUnion(courseId)
+        });
+    },
+    
+    // Unassign a professor from the given course (remove it from their list of assigned courses)
+    unassignCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = db.collection('users').doc(userId);
+        await doc.update({
+            assigned_courses: firebase.firestore.FieldValue.arrayRemove(courseId)
+        });
+    },
+    
+    // Check if a professor is assigned to the given course
+    assignedToCourse: async (userId, courseId) => {
+        const db = firebase.firestore();
+        
+        const doc = await db.collection('users').doc(userId).get();
+        if (doc.exists && doc.data().assigned_courses?.includes(courseId))
+            return true;
+        return false;
+    },
     
 }
 
