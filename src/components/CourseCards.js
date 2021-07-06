@@ -10,7 +10,9 @@ import {
   CardActionArea,
   CardMedia
 } from "@material-ui/core/";
-
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import { useHistory, Redirect } from 'react-router-dom'
+import GridOnIcon from '@material-ui/icons/GridOn';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,18 +30,22 @@ export default function AltCard() {
       setCourse(courses);
     });
   }, []);
+  let history = useHistory();
+
+  const handleListClick= ()=>{
+    console.log('Button is cliked!');
+    history.push('/studentCourse');
+  }
+  const handleCardClick= ()=>{
+    console.log('Button is cliked!');
+    history.push('/courseCards');
+  }
   
-  const data = {
-    name: [
-      { quarter: 1, earnings: 13000 },
-      { quarter: 2, earnings: 16500 },
-      { quarter: 3, earnings: 14250 },
-      { quarter: 4, earnings: 19000 }
-    ],
-    id: [1, 2, 3, 4]
-  };
+   
   return (
     <div className={classes.root}>
+        <ListAltIcon onClick= {handleListClick}/>
+      <GridOnIcon onClick= {handleCardClick}/>
       {course.map((elem) => (
         <Grid
           container

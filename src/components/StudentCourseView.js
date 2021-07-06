@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import { useHistory, Redirect } from 'react-router-dom'
 import Paper from "@material-ui/core/Paper";
+import StudentCourse from './StudentCourse'
 
 
 import GridOnIcon from '@material-ui/icons/GridOn';
@@ -20,6 +21,7 @@ function StudentCourseView(){
     <div>
         <ListAltIcon onClick= {handleListClick}/>
       <GridOnIcon onClick= {handleCardClick}/>
+      <StudentCourse/>
     </div>
   )
 }
