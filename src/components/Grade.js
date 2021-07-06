@@ -1,12 +1,14 @@
-import { Container,Button, Row, Col,Modal } from 'react-bootstrap';
 import React from 'react'
+import { Container, Card, Button, Row, Col,Modal } from 'react-bootstrap';
+//import CourseService from '../services/courseService';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Assignment=(props)=> {
+const GradeModal=(props)=> {
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-           Assignments Details
+         Grade Details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
@@ -35,4 +37,4 @@ const Assignment=(props)=> {
       </Modal>
     );
 }
-export default Assignment
+export default GradeModal
