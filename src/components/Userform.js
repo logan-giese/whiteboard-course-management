@@ -67,7 +67,7 @@ const Userform =(props)=> {
            onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group">
-          <textarea className ="form-control" placeholder ="role" name="role" value={values.address } onChange ={ handleInputChnage}/>
+          <textarea className ="form-control" placeholder ="role" name="role" value={values.role } onChange ={ handleInputChnage}/>
       </div>
      
       </div>

@@ -10,6 +10,9 @@ import ServiceTestPage from './components/test/ServiceTestPage'
 import {Navigation} from './components/Navigation'
 import logo from './logo.svg';
 import Users from './components/Users';
+import StudentCourseView from './components/StudentCourseView';
+import StudentCourse from './components/StudentCourse'
+import CourseCards from './components/CourseCards'
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
      <Route path='/profile' component={Profile} />
      <Route path='/courses' component={Courses} />
      <Route path='/users' component={Users} />
+     <Route path='/studentCourseView' component={StudentCourseView} />
+     <Route path='/studentCourse' component={StudentCourse} />
+     <Route path='/courseCards' component={CourseCards} />
      <Route path='/service-tests' component={ServiceTestPage} />
    </Switch>
  </div>

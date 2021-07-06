@@ -107,7 +107,7 @@ function Users() {
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
                                         <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
                                 <a className ='btn text-danger' >
-                                   <DeleteIcon onClick={() => handaledelete()}/>
+                                   <DeleteIcon onClick={() => handaledelete(id)}/>
                                 </a>
                         </td>
                         

@@ -133,6 +133,7 @@ const Profile = (props) => {
           <Button
             color="primary"
             variant="contained"
+            onClick ={handleSubmit}
             style={{backgroundColor: '#808080', color: '#FFFFFF'}}
           >
             Update Profile
