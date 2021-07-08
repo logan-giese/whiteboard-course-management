@@ -47,5 +47,8 @@
   },
   "bugs": {
     "url": "https://github.com/logan-giese/whiteboard-course-management/issues"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
