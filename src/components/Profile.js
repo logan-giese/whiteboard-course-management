@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+
+import React, {useState, useEffect  }  from 'react';
 import {
   Box,
   Button,
@@ -28,7 +29,7 @@ const Profile = (props) => {
   }, []);
   const handleSubmit =e =>{
     e.preventDefault();
-    UserService.updateUser("IVgTk03HogEQyQrlK2MJ",e).then(()=>{
+    UserService.updateUser("IVgTk03HogEQyQrlK2MJ",values).then(()=>{
       console.log("user Updated successfully")
     }).catch((e)=>{
       console.log(e)

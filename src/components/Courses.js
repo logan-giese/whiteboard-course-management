@@ -24,7 +24,8 @@ function Courses() {
       });
     }, []);
     
-    const handleClickOpen = () => {
+    const handleClickOpen = (id) => {
+    setCurrentId(id)
    setOpen(true);
     };
   
@@ -51,7 +52,7 @@ function Courses() {
     });
         } else 
         //update
-        courseService.updateCourse(currentId,e).then(()=>{
+        courseService.updateCourse(e.id,e).then(()=>{
           console.log("course Updated successfully")
         }).catch((e)=>{
           console.log(e)
@@ -105,9 +106,9 @@ function Courses() {
                       <td>{course[id].session_code}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
+                                        <CreateIcon onClick ={() => handleClickOpen(course[id].id)}/></a> 
                                 <a className ='btn text-danger' >
-                                   <DeleteIcon onClick={() => handaledelete()}/>
+                                   <DeleteIcon onClick={() => handaledelete(course[id].id)}/>
                                 </a>
                         </td>
                         

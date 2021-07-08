@@ -46,7 +46,7 @@ export default function AltCard() {
     <div className={classes.root}>
         <ListAltIcon onClick= {handleListClick}/>
       <GridOnIcon onClick= {handleCardClick}/>
-      {course.map((elem) => (
+      {Object.keys(course).map(id => 
         <Grid
           container
           spacing={2}
@@ -55,23 +55,23 @@ export default function AltCard() {
           alignItems="flex-start"
         >
           
-            <Grid item xs={3} key={course.course_code}>
+            <Grid item xs={3} key={id}>
             <Card className={classes.root}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
           image="/static/images/cards/contemplative-reptile.jpg"
-          title={elem.title}
+          
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {elem.title}
+            {course[id].title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-           {elem.semester_code}
+           {course[id].semester_code}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {elem.course_code}
+            {course[id].course_code}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -81,7 +81,7 @@ export default function AltCard() {
             </Grid>
         
         </Grid>
-      ))}
+      )}
     </div>
   );
 }

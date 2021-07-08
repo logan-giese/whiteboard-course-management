@@ -24,7 +24,8 @@ function Users() {
       });
     }, []);
     
-    const handleClickOpen = () => {
+    const handleClickOpen = (id) => {
+      setCurrentId(id)
    setOpen(true);
     };
   
@@ -51,7 +52,7 @@ function Users() {
     });
         } else 
         //update
-        UserService.updateUser(currentId,e).then(()=>{
+        UserService.updateUser(e.id,e).then(()=>{
           console.log("user Updated successfully")
         }).catch((e)=>{
           console.log(e)
@@ -105,9 +106,9 @@ function Users() {
                       <td>{user[id].role}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
+                                        <CreateIcon onClick ={() => handleClickOpen(user[id].id)}/></a> 
                                 <a className ='btn text-danger' >
-                                   <DeleteIcon onClick={() => handaledelete(id)}/>
+                                   <DeleteIcon onClick={() => handaledelete(user[id].id)}/>
                                 </a>
                         </td>
                         
