@@ -1,125 +1,96 @@
-import React, {useState, useEffect} from 'react';
-import courseService from '../services/courseService';
-import CreateIcon from '@material-ui/icons/Create';
-import DeleteIcon from '@material-ui/icons/Delete';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Courseform from './Courseform';
 
+import React, { useState } from 'react';
+import { Container, Card, Button, Row, Col,Modal } from 'react-bootstrap';
+import CourseService from '../services/courseService';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AssignmentModal from '../components/Assignment';
+import CourseDetailsModal from '../components/CourseContent';
+import GradeModal from '../components/Grade';
+//import CourseContent from './CourseContent';
 
-function Courses() {
- 
-
-    const [course, setCourse] = useState([])
-    const [currentId, setCurrentId] = useState('')
-    const [open, setOpen] = useState(false);
-    
-    useEffect(() => {
-      courseService.getCourses().then((courses) => {
-        setCourse(courses);
-      });
-    }, []);
-    
-    const handleClickOpen = (id) => {
-    setCurrentId(id)
-   setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-   const handaledelete =(id) =>{
-     
-    courseService.deleteCourse(id).then(()=>{
-      
-    }).catch((e)=>{
-      console.log(e)
-    })
-    setCurrentId('')
-   }
-   const addorEdit = (e) =>{
-       if(currentId ===''){
-    //create function
-    courseService.createCourse(e).then(()=>{
-      console.log("created new item successfully!")
-
-    }).catch((e)=>{
-      console.log("failled to create a new course")
+const Courses = () => {
+  const [courses, setCourses] = useState([]);
+  const [courseModalShow, setCourseModalShow] = useState(false);
+  const [courseModalData,setCourseModalData] = useState({
+    homework: "test",
+    homeworkSolution: "Solved",
+    quiz: "pass",
     });
-        } else 
-        //update
-        courseService.updateCourse(e.id,e).then(()=>{
-          console.log("course Updated successfully")
-        }).catch((e)=>{
-          console.log(e)
-        })
-        setCurrentId('')
+  const [assignmentModalShow, setAssignmentModalShow] = useState(false);
+  const [assignmentModalData,setAssignmentModalData] = useState({
+      homework: "test",
+      homeworkSolution: "Solved",
+      quiz: "pass",
+      });
+  const [gradeModalShow, setGradeModalShow] = useState(false);
+  const [gradeModalData,setGradeModalData] = useState({
+          homework: "test",
+          homeworkSolution: "Solved",
+          quiz: "pass",
+          });
 
-    }
-    
+  return <Container><div><h1>Courses page</h1>
+    <Row><Col>
+      <button type="button" className="btn btn-primary" onClick={
+        async () => {
+          setCourses(await CourseService.getCourses());
+
+        }
+      }>Display All Courses</button></Col>
+    </Row>
+    <br />
+    <Row>
+      {courses.map((course) => {
+        return <Col lg={12}><Card >
+          {/* <Card.Img variant="top" src="https://via.placeholder.com/30x30" /> */}
+          <Card.Body>
+            <Card.Title>Course Name</Card.Title>
+            <Card.Text><CourseDetails course={course} />
+            </Card.Text>
+            <Button variant="primary" onClick={() => setCourseModalShow(true)}>
+            Course Contents
+            </Button>
+            <Button variant="primary" onClick={() => setAssignmentModalShow(true)}>
+           Assignments
+            </Button>
+            <Button variant="primary" onClick={() => setGradeModalShow(true)}>
+           Grade
+            </Button>
+            <GradeModal show={gradeModalShow} data={gradeModalData} onHide={() => setGradeModalShow(false)} />
+            <AssignmentModal show={assignmentModalShow} data={assignmentModalData} onHide={() => setAssignmentModalShow(false)} />
+            <CourseDetailsModal show={courseModalShow} data={courseModalData} onHide={() => setCourseModalShow(false)} />
+          </Card.Body>
+        </Card></Col>
+      })}
+    </Row>
+    <br />
+  </div></Container>
+}
+const CourseDetails = (props) => {
+  const course = props.course;
   return (
-       
-    <div className="table">
+    <div>
+      <span >ID: {course.id}</span>
+      <span>Title: {course.title}</span>
+      <span>Course Code: {course.course_code}</span>
+      <span>Session Code: {course.session_code}</span>
+     
+      {/* <ul>
+        {course.content.id}
+        {course.content.title}
+        {course.content.description}
+        {course.content.content}
+      </ul> */}
     
-    
-    <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add Course
-      </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">  Add or Edit Page</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-       
-          </DialogContentText>
-          
-        <Courseform {...({addorEdit, currentId, course})}/>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        
-        </DialogActions>
-      </Dialog>
-    <table className ="table table-borderless table-stripped">
-        <thead className="thead-light">
-            <tr>
-                <th>Title</th>
-                <th>Course Code</th>
-                <th>Semester Code</th>
-                <th>Session Code</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-          {
-              
-              Object.keys(course).map(id =>{
-                  return < tr key={id}>
-                      <td>{course[id].title}</td>
-                      <td>{course[id].course_code}</td>
-                      <td>{course[id].semester_code}</td>
-                      <td>{course[id].session_code}</td>
-                      <td>
-                      <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={() => handleClickOpen(course[id].id)}/></a> 
-                                <a className ='btn text-danger' >
-                                   <DeleteIcon onClick={() => handaledelete(course[id].id)}/>
-                                </a>
-                        </td>
-                        
-                  </tr>
-              })
-          }  
-        </tbody>
-    </table>
- </div>
-    
+      {/* <ul>
+      {course.content.deadline}
+      {course.content.submissions}
+      </ul><br /> */}
+    </div>
   )
 }
+ 
+ 
+
 
 export default Courses
