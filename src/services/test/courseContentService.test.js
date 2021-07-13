@@ -33,11 +33,21 @@ test('creates new course content in a new course', async () => {
 });
 
 // Fetch
-test('fetches course content', async () => {
+test('fetches specific course content', async () => {
     let retrievedContent;
 
     await CourseContentService.getCourseContentById(testCourseId, testContentId)
         .then((content) => (retrievedContent = content));
+
+    expect(retrievedContent).toMatchObject({ id: testContentId, ...testContentObject });
+});
+
+// Fetch All
+test('fetches all course content', async () => {
+    let retrievedContent;
+
+    await CourseContentService.getCourseContent(testCourseId)
+        .then((contents) => (retrievedContent = contents[0]));
 
     expect(retrievedContent).toMatchObject({ id: testContentId, ...testContentObject });
 });
