@@ -1,6 +1,6 @@
 import { Container,Button, Row, Col,Modal } from 'react-bootstrap';
 import React from 'react'
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 const Assignment=(props)=> {
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">

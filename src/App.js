@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import * as ReactBootStrap from 'react-bootstrap'
 import About from './components/About'
 import Profile from './components/Profile'
 import Courses from './components/Courses'
@@ -9,7 +8,6 @@ import Messages from './components/Messages'
 import Home from './components/Home'
 import ServiceTestPage from './components/test/ServiceTestPage'
 import {Navigation} from './components/Navigation'
-import logo from './logo.svg';
 
 function App() {
   return (

@@ -13,3 +13,7 @@ code {
     monospace;
 }
 
+.modal-backdrop
+{
+    opacity:0.1 !important;
+}

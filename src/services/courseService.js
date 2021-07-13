@@ -25,6 +25,21 @@ const CourseService = {
         return (doc.exists ? {id: id, ...doc.data()} : null);
     },
     
+    // Get a collection of courses matching the provided array of course IDs
+    // Example: getCoursesById(student.enrolled_courses)
+    getCoursesById: async (ids) => {
+        const db = firebase.firestore();
+        
+        const refs = ids.map(id => db.collection('courses').doc(id));
+        const courses = await db.getAll(...refs);
+        return courses.map((course) => {
+            return {
+                id: course.id,
+                ...course.data()
+            }
+        });
+    },
+    
     // Create a new course with the provided data and return the ID
     createCourse: async (newCourse) => {
         const db = firebase.firestore();

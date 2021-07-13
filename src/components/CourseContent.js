@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Card, Button, Row, Col,Modal } from 'react-bootstrap';
+import { Container, Button, Row, Col,Modal } from 'react-bootstrap';
 //import CourseService from '../services/courseService';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,7 +15,7 @@ const CourseDetailsModal=(props)=> {
           <Container>
             <Row>
               <Col xs={12} md={8}>
-               {props.data.homework}
+               {props.data.title}
               </Col>
               </Row>
               <Row>
