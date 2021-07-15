@@ -1,0 +1,43 @@
+
+.container-fluid{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #FFF;
+  }
+
+.background {
+    background: linear-gradient(132deg, #64d8bd, #ebdea8, #ddaa7a);
+    background-size: 400% 400%;
+    animation: Gradient 8s ease infinite;
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    padding:0;
+    margin:0px;
+    
+  }
+  
+.glow:hover{
+    transition: 0.2s;
+    position: relative;
+    z-index: 2;
+    box-shadow: 2px 2px 8px 8px	#9edcc6;
+    cursor: pointer;
+  }
+   
+@keyframes Gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  
