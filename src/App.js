@@ -5,6 +5,7 @@ import * as ReactBootStrap from "react-bootstrap";
 import About from "./components/About";
 import Profile from "./components/Profile";
 import Courses from "./components/Courses";
+import Assignments from "./components/Assignments";
 import Messages from "./components/Messages";
 import Home from "./components/Home";
 import ServiceTestPage from "./components/test/ServiceTestPage";
@@ -23,6 +24,7 @@ function App({ handleLogout, user }) {
             <Route path="/about" component={About} />
             <Route path="/profile" component={Profile} />
             <Route path="/courses" component={Courses} />
+            <Route path="/courses/assignments" component={Assignments} />
             <Route path="/messages" component={Messages} />
             <Route path="/service-tests" component={ServiceTestPage} />
           </Switch>
@@ -31,4 +33,5 @@ function App({ handleLogout, user }) {
     </BrowserRouter>
   );
 }
+
 export default App;

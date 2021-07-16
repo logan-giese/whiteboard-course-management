@@ -1,12 +1,12 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom';
+import React from 'react'
+import { Button } from 'react-bootstrap';
 
-class Messages extends React.Component{
-       render(){
-        return (
+function About() {
+    return <div className="content">
         <h1>Messages page</h1>
-        );
-    }    
-}
-
-export default Messages
+        <Button> Inbox </Button> 
+        <Button> Sent </Button>
+      </div>;
+  }
+  
+  export default About;
