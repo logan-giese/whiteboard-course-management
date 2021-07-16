@@ -1,9 +1,14 @@
+/* General app styling */
+
+.content {
+  padding:20px 30px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
-  
 }
 
 button {
@@ -19,6 +24,15 @@ button {
   cursor: pointer;
 }
 
+button:hover{
+  background: #DC2424;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4A569D, #DC2424);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: rgb(226, 220, 220);
+}
+
+/* Login page styling */
+
 .login {
   width: 100%;
   min-height: 100vh;
@@ -26,6 +40,7 @@ button {
   background: #DC2424;  /* fallback for old browsers */
   display: flex;
 }
+
 .head{
   color:#ddcaca;
   font-size: 30px;
@@ -45,7 +60,6 @@ button {
   box-shadow: 0 50px 70px -20px rgba(238, 226, 226, 0.8);
   transition: 0.6s;
 }
-
 
 .login .loginContainer label {
   color:#dfcece;
@@ -98,13 +112,4 @@ button {
 .resetbtn{
   margin-bottom: 20px;
   margin-top: 20px;
-}
-
-button:hover{
-  background: #DC2424;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #4A569D, #DC2424);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  
-  color: white;
-
 }

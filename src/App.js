@@ -1,155 +1,34 @@
-import React, {useEffect, useState} from 'react';
-import fire from "./services/firebase";
-import Login from"./Login"
-import Dashboard from './Dashboard'
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap";
+import About from "./components/About";
+import Profile from "./components/Profile";
+import Courses from "./components/Courses";
+import Messages from "./components/Messages";
+import Home from "./components/Home";
+import ServiceTestPage from "./components/test/ServiceTestPage";
+import { Navigation } from "./components/Navigation";
 
-const App = () => {
-  const [user, setUser] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [hasAccount, setHasAccount] = useState(true);
-  const [loading, setLoading] = useState(false);
-
-  
-  
-  const clearInputs = () =>{
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('')
-  }
-  const clearErrors = () =>{
-    setEmailError('');
-    setPasswordError('');
-    setConfirmPasswordError('')
-  }
-const handleLogin = () =>{
-  setLoading(true)
-  clearErrors();
-  fire
-  .auth()
-  .signInWithEmailAndPassword(email, password).then((user)=>{
-    setLoading(false)
-    setUser(user)
-    clearInputs()
-  })
-  .catch(err =>{
-    setLoading(false)
-    switch(err.code){
-      case "auth/invalid-email":
-      case "auth/user-disabled":
-      case "auth/user-not-found":
-      setEmailError(err.message);
-      break;
-      case "auth/wrong-password":
-        setPasswordError(err.message);
-        break;
-    }
-  });
-  
-
-}
-
-const validateConfirmPassword=(password,confirmPassword )=>{
-  if(password==confirmPassword){
-    return true
-  }
-  else{
-    setConfirmPasswordError("Password doesn't match")
-    return false
-  }
-}
-
-const handlesignUp = () =>{
-  setLoading(true)
-  if(!(validateConfirmPassword(password, confirmPassword))){
-    setLoading(false)
-    return
-  }
-  clearErrors();
-  fire
-  .auth()
-  .createUserWithEmailAndPassword(email, password).then((user)=>{
-    setLoading(false)
-    setUser(user)
-    clearInputs()
-  })
-  .catch(err =>{
-    setLoading(false)
-    switch(err.code){
-      case "auth/email-already-in-use":
-      case "auth/invalid-email":
-      setEmailError(err.message);
-      break;
-      case "auth/weak-password":
-        setPasswordError(err.message);
-        break;
-    }
-  });
- 
-
-}
-
-const resetPassword=(email)=>{
-  setLoading(true)
-   return fire.auth().sendPasswordResetEmail(email).then(()=>{ 
-    clearErrors()
-    clearInputs()
-    setLoading(false)
-  })
-}
-const handleLogout = ()=>{
-  fire.auth().signOut();
-};
-const authListener = ()=>{
-  fire.auth().onAuthStateChanged((user) => {
-    if(user){
-      clearInputs(); 
-   setUser(user);
-    }
-    else{
-      setUser("");
-    }
-  });
-}
-useEffect(() => {
-  authListener();
-},[]);
+function App({ handleLogout, user }) {
   return (
-    <div className = "App">
-      {user ? (
-        <Dashboard handleLogout={handleLogout} />
-      ) : (
-     <Login 
-     email = {email} 
-     setEmail = {setEmail} 
-     password = {password}
-     setPassword = {setPassword}
-     handleLogin = {handleLogin}
-     handlesignUp = {handlesignUp}
-     hasAccount = {hasAccount}
-     setHasAccount = {setHasAccount}
-     emailError = {emailError}
-     passwordError = {passwordError}
-     confirmPassword={confirmPassword}
-     setConfirmPassword={setConfirmPassword}
-     confirmPasswordError={confirmPasswordError}
-     forgotPassword={forgotPassword}
-     setForgotPassword={setForgotPassword}
-     resetPassword={resetPassword}
-     loading={loading}
-     setLoading={setLoading}
-     user={user}
-     setUser={setUser}
-     />
-      )}
-    </div>
+    <BrowserRouter>
+      <div className="Container">
+        <h1 className="m-3 d-flex justify-content-center">OC BLACKBOARD</h1>
+        <button onClick={handleLogout}>Logout</button>
+        <Navigation />
+        <div className="route">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/about" component={About} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/courses" component={Courses} />
+            <Route path="/messages" component={Messages} />
+            <Route path="/service-tests" component={ServiceTestPage} />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
-
 export default App;

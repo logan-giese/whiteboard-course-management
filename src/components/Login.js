@@ -29,7 +29,7 @@ const Login = (props) => {
         <h1 className="head" align="center">
           Welcome{" "}
         </h1>
-        <label>Username</label>
+        <label>Email</label>
         <input
           type="text"
           autoFocus
@@ -110,4 +110,5 @@ const Login = (props) => {
     </section>
   );
 };
+
 export default Login;
