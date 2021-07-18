@@ -101,11 +101,12 @@ const newAssignmentChanged = (e) => {
   const course = props.course;
   return (
     <div>
-      <span >ID: {course.id}</span>
-      <span>Title: {course.title}</span>
-      <span>Course Code: {course.course_code}</span>
-      <span>Session Code: {course.session_code}</span>
-      <h3>Add Assignment</h3>
+      
+      <span><b>Title:</b> {course.title}  </span>
+      <span><b>Course Code:</b> {course.course_code}  </span>
+      <span><b>Session Code:</b> {course.session_code}  </span>
+      <b>Add Assignment</b>
+      
      <form>
          <input type="text" placeholder="title" name="title" onChange={newAssignmentChanged} />
          <input type="text" placeholder="description" name="description" onChange={newAssignmentChanged} /><br/>
@@ -113,6 +114,11 @@ const newAssignmentChanged = (e) => {
          <input type="number" placeholder="type" name="type" defaultValue="0" onChange={newAssignmentChanged} /><br/><br/>
          <input type="number" placeholder="Is assignment" name="is_assignment" defaultValue="0" onChange={newAssignmentChanged} /><br/><br/>
          <input type="text" placeholder="deadline" name="deadline"  onChange={newAssignmentChanged} /><br/><br/>
+         <b>Assignment Content</b> 
+          <input type="radio" value="Yes" name="Assignment"/>Yes
+         <input type="radio" value="Yes" name="Assignment"/>No
+        <br></br>
+        
          <button className="btn btn-secondary" onClick={async (e) => {
              e.preventDefault();
              console.log("Assignment created with ID: " + await AssignmentService.addAssignment(course.id,newAssignment));
