@@ -1,4 +1,3 @@
-import React from 'react';
 import React, { Component }  from 'react';
 import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
@@ -17,29 +16,29 @@ import StudentCourseView from './components/StudentCourseView';
 import StudentCourse from './components/StudentCourse'
 import CourseCards from './components/CourseCards'
 
-function App() {
+function App({ handleLogout, user }) {
   return (
- <BrowserRouter>
- <div className = "Container">
- {/* <img src={logo} className ="App-logo" alt ="logo" /> */}
-   <h1 className = "m-3 d-flex justify-content-center">OC BLACKBOARD</h1>
-   
-   <Navigation/>
-   <Switch>
-     <Route path='/' component={Home} exact />
-     <Route path='/about' component={About} />
-     <Route path='/profile' component={Profile} />
-     <Route path='/courses' component={Courses} />
-     <Route path='/courses/assignments' component={Assignments} />
-     <Route path ='/messages' component ={Messages}/>
-     <Route path='/users' component={Users} />
-     <Route path='/studentCourseView' component={StudentCourseView} />
-     <Route path='/studentCourse' component={StudentCourse} />
-     <Route path='/courseCards' component={CourseCards} />
-     <Route path='/service-tests' component={ServiceTestPage} />
-   </Switch>
- </div>
- </BrowserRouter>
+    <BrowserRouter>
+      <div className="Container">
+        <h1 className="m-3 d-flex justify-content-center">OC BLACKBOARD</h1>
+        <button onClick={handleLogout}>Logout</button>
+        <Navigation />
+        <div className="route">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/about" component={About} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/courses" component={Courses} />
+            <Route path="/courses/assignments" component={Assignments} />
+            <Route path='/studentCourseView' component={StudentCourseView} />
+            <Route path='/studentCourse' component={StudentCourse} />
+            <Route path='/courseCards' component={CourseCards} />
+            <Route path="/messages" component={Messages} />
+            <Route path="/service-tests" component={ServiceTestPage} />
+          </Switch>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 

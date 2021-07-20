@@ -5,13 +5,14 @@ import reportWebVitals from './reportWebVitals';
 
 // Main app files
 import './index.css';
-import App from './App';
+import OpeningPage from './OpeningPage';
 
 
 // Render the app
 ReactDOM.render(
-  
-    <App />,
+  <React.StrictMode>
+    <OpeningPage />
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
