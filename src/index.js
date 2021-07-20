@@ -5,16 +5,18 @@ import reportWebVitals from './reportWebVitals';
 
 // Main app files
 import './index.css';
-import App from './App';
+import OpeningPage from './OpeningPage';
 
 
 // Render the app
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <OpeningPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

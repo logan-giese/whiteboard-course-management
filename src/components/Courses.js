@@ -115,6 +115,7 @@ const newAssignmentChanged = (e) => {
          <input type="text" placeholder="deadline" name="deadline"  onChange={newAssignmentChanged} /><br/><br/>
          <button className="btn btn-secondary" onClick={async (e) => {
              e.preventDefault();
+             alert("Assignment Created");
              console.log("Assignment created with ID: " + await AssignmentService.addAssignment(course.id,newAssignment));
          }}>Create Assignment</button>
      </form><br/>
