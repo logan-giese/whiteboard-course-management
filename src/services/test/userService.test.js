@@ -60,11 +60,30 @@ test('updates a user', async () => {
     });
 });
 
-// Enroll Course
-// TODO
+// Enroll Course (Student)
+test("enrolls a user in a course", async () => {
+    let isEnrolled = false;
 
-// Assign Course
-// TODO
+    await UserService.enrollCourse(testUserId, "test4");
+
+    await UserService.enrolledInCourse(testUserId, "test4")
+        .then((enrolled) => (isEnrolled = enrolled))
+
+    expect(isEnrolled).toBe(true);
+});
+
+// Assign Course (Professor)
+test("assigns a user to a course", async () => {
+    let isAssigned = false;
+
+    await UserService.assignCourse(testUserId, "test4");
+
+    await UserService.assignedToCourse(testUserId, "test4").then(
+        (assigned) => (isAssigned = assigned)
+    );
+
+    expect(isAssigned).toBe(true);
+});
 
 // Delete
 test('deletes a user', async () => {
