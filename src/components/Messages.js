@@ -8,22 +8,22 @@ import ReactDOM from 'react-dom';
       super(props);
       this.handleInboxClick = this.handleInboxClick.bind(this);
       this.handleBackClick = this.handleBackClick.bind(this);
-      this.state = {isLoggedIn: false};
+      this.state = {isInboxed: false};
     }
   
     handleInboxClick() {
-      this.setState({isLoggedIn: true});
+      this.setState({isInboxed: true});
     }
   
     handleBackClick() {
-      this.setState({isLoggedIn: false});
+      this.setState({isInboxed: false});
     }
   
     render() {
-      const isLoggedIn = this.state.isLoggedIn;
+      const isInboxed = this.state.isInboxed;
       let button;
   
-      if (isLoggedIn) {
+      if (isInboxed) {
         button = <BackButton onClick={this.handleBackClick} />;
       } else {
         button = <InboxButton onClick={this.handleInboxClick} />;
@@ -31,27 +31,27 @@ import ReactDOM from 'react-dom';
   
       return (
         <div>
-          <Greeting isLoggedIn={isLoggedIn} />
+          <Titles isInboxed={isInboxed} />
           {button}
         </div>
       );
     }
   }
   
-  function UserGreeting(props) {
+  function InboxTitle(props) {
     return <h1>Welcome to Inbox Page!</h1>;
   }
   
-  function GuestGreeting(props) {
+  function MessagesTitle(props) {
     return <h1>Welcome to Messages Page!</h1>;
   }
   
-  function Greeting(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if (isLoggedIn) {
-      return <UserGreeting />;
+  function Titles(props) {
+    const isInboxed = props.isInboxed;
+    if (isInboxed) {
+      return <InboxTitle />;
     }
-    return <GuestGreeting />;
+    return <MessagesTitle />;
   }
   
   function InboxButton(props) {
@@ -70,9 +70,4 @@ import ReactDOM from 'react-dom';
     );
   }
   
-  ReactDOM.render(
-    <Messages />,
-    document.getElementById('root')
-  );
-
   export default Messages
