@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import AssignmentService from '../services/assignmentservice';
+import AssignmentService from '../services/assignmentService';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -8,7 +8,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import AssignemntForm from './AssignmentForm';
+import AssignmentForm from './AssignmentForm';
 
 
 function Assignments() {
@@ -17,8 +17,8 @@ function Assignments() {
     const [open, setOpen] = useState(false);
     
     useEffect(() => {
-      AssignmentService.getAssignment().then((Assignment) => {
-        setAssignment(assingment);
+      AssignmentService.getAssignment().then((assignment) => {
+        setAssignment(assignment);
       });
     }, []);
     
@@ -40,7 +40,7 @@ function Assignments() {
    const addorEdit = (e) =>{
     if(currentId ===''){
     //create function
-      AssignmentService.createAssignment(e).then(()=>{
+      AssignmentService.addAssignment(e).then(()=>{
         console.log("created assignment")
 
      }).catch((e)=>{
@@ -49,7 +49,7 @@ function Assignments() {
     } 
     else 
       //update
-      UserService.updateUser(currentId,e).then(()=>{
+      AssignmentService.updateAssignment(currentId,e).then(()=>{
         console.log("assignment created successfully")
         }).catch((e)=>{
           console.log("assignment creation failed")
@@ -69,7 +69,7 @@ function Assignments() {
           <DialogContentText>
           Add or Edit page
           </DialogContentText>
-        <Courseform {...({addorEdit, currentId, user})}/>
+        <AssignmentForm {...({addorEdit, currentId, assignment})}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -95,7 +95,7 @@ function Assignments() {
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
                                         <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
                                 <a className ='btn text-danger'>
-                                   <DeleteIcon onClick={() => handaledelete(id)}/>
+                                   <DeleteIcon onClick={() => handleDelete(id)}/>
                                 </a>
                         </td>  
                   </tr>
