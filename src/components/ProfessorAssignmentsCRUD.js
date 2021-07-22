@@ -17,7 +17,7 @@ function Assignments() {
     const [open, setOpen] = useState(false);
     
     useEffect(() => {
-      AssignmentService.getAssignment().then((assignment) => {
+      AssignmentService.getAssignments("9Qp7uq03V7PB0GKpzHcr").then((assignment) => {
         setAssignment(assignment);
       });
     }, []);
@@ -30,7 +30,7 @@ function Assignments() {
       setOpen(false);
     };
    const handleDelete =(id) =>{
-    AssignmentService.deleteAssignment(id).then(()=>{
+    AssignmentService.deleteAssignment("9Qp7uq03V7PB0GKpzHcr", id).then(()=>{
       
     }).catch((e)=>{
       console.log(e)
@@ -40,7 +40,7 @@ function Assignments() {
    const addorEdit = (e) =>{
     if(currentId ===''){
     //create function
-      AssignmentService.addAssignment(e).then(()=>{
+      AssignmentService.addAssignment("9Qp7uq03V7PB0GKpzHcr",e).then(()=>{
         console.log("created assignment")
 
      }).catch((e)=>{
@@ -49,7 +49,7 @@ function Assignments() {
     } 
     else 
       //update
-      AssignmentService.updateAssignment(currentId,e).then(()=>{
+      AssignmentService.updateAssignment("9Qp7uq03V7PB0GKpzHcr",e.id,e).then(()=>{
         console.log("assignment created successfully")
         }).catch((e)=>{
           console.log("assignment creation failed")
@@ -61,13 +61,13 @@ function Assignments() {
        
     <div className="table">
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        AddUser
+        Add Assignment
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Assignment</DialogTitle>
         <DialogContent>
           <DialogContentText>
-          Add or Edit page
+        
           </DialogContentText>
         <AssignmentForm {...({addorEdit, currentId, assignment})}/>
         </DialogContent>
@@ -82,20 +82,23 @@ function Assignments() {
         <thead className="thead-light">
             <tr>
               <th>Name</th>
-              <th>link to object</th>
+              <th>Description</th>
+              <th>Content</th>
+              <th>Action</th>
             </tr>
         </thead>
         <tbody>
           { 
             Object.keys(assignment).map(id =>{
               return < tr key={id}>
-                      <td>{assignment[id].first_name}</td>
-                      <td>{assignment[id].data}</td>
+                      <td>{assignment[id].title}</td>
+                      <td>{assignment[id].description}</td>
+                      <td>{assignment[id].content}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={() => handleClickOpen(id)}/></a> 
+                                        <CreateIcon onClick ={() => handleClickOpen(assignment[id].id)}/></a> 
                                 <a className ='btn text-danger'>
-                                   <DeleteIcon onClick={() => handleDelete(id)}/>
+                                   <DeleteIcon onClick={() => handleDelete(assignment[id].id)}/>
                                 </a>
                         </td>  
                   </tr>
