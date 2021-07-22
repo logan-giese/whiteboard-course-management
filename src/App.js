@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import * as ReactBootStrap from 'react-bootstrap'
 import About from './components/About'
 import Profile from './components/Profile'
-import Courses from './components/Courses'
+import Courses from './components/AdminCourses'
 import Assignments from './components/ProfessorAssignmentsCRUD'
 import Messages from './components/Messages'
 import Home from './components/Home'
