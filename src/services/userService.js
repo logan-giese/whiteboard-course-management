@@ -26,11 +26,17 @@ const UserService = {
     },
     
     // Create a new user with the provided data and return the ID
-    createUser: async (newUser) => {
+    // An ID can be optionally provided to give the new user a specific ID
+    createUser: async (newUser, id = "") => {
         const db = firebase.firestore();
         
-        const doc = await db.collection('users').add(newUser);
-        return doc.id;
+        if (id == "") {
+            const doc = await db.collection("users").add(newUser);
+            return doc.id;
+        } else {
+            await db.collection("users").doc(id).set(newUser);
+            return id;
+        }
     },
     
     // Update a user by ID, changing only the fields in the provided data object
