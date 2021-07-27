@@ -27,6 +27,26 @@ class Tools extends Component{
               <Button variant="primary">Portfolios</Button>
             </Card.Body>
           </Card>
+          <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>Goal</Card.Title>
+              <Card.Text>
+                Goals of the student.
+              </Card.Text>
+              <Button variant="primary">Portfolios</Button>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>Performance</Card.Title>
+              <Card.Text>
+                Performance of the student in coursework & other activities.
+              </Card.Text>
+              <Button variant="primary">Portfolios</Button>
+            </Card.Body>
+          </Card>
           </div>
         
       
