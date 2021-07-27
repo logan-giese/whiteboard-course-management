@@ -1,129 +1,179 @@
-import React, { useState } from 'react';
-import { Container, Card, Button, Row, Col } from 'react-bootstrap';
-import CourseService from '../services/courseService';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import AssignmentModal from '../components/Assignment';
-import CourseDetailsModal from '../components/CourseContent';
-import GradeModal from '../components/Grade';
-import CourseContentService from '../services/courseContentService';
-import AssignmentService from '../services/assignmentService';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import courseService from '../services/courseService';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  CardHeader
+} from "@material-ui/core/";
+import { useHistory, Redirect } from 'react-router-dom'
+import Courseform from './Assigform';
+import Gradeform from './Grade';
+import CourseDetail from './CourseContent';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    padding: theme.spacing(2)
+  }
+}));
 
+export default function StudentCourse() {
+  const classes = useStyles();
+  const [course, setCourse] = useState([])
+  const [currentId, setCurrentId] = useState('')
+  const [open, setOpen] = useState(false);
+  const [opendetails, setOpendetails] = useState(false);
+  const [opengrade, setOpengrade] = useState(false);
+  useEffect(() => {
+    courseService.getCourses().then((courses) => {
+      setCourse(courses);
+    });
+  }, []);
+  let history = useHistory();
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-const Courses = () => {
-  const [courses, setCourses] = useState([]);
-  const [courseModalShow, setCourseModalShow] = useState(false);
-  const [courseModalData, setCourseModalData] = useState({
-    id:"WnXd1NOMSYlqY4ofj9RC",
-    title:"",
-    description:"",
-    content:"",
-    type:"",
-    is_assignment:"",
-    deadline:"",
-    submissions:"",
-  });
-  const [assignmentModalShow, setAssignmentModalShow] = useState(false);
-  const [assignmentModalData, setAssignmentModalData] = useState({
-    homework: "test",
-    homeworkSolution: "Solved",
-    quiz: "pass",
-  });
-  const [gradeModalShow, setGradeModalShow] = useState(false);
-  const [gradeModalData, setGradeModalData] = useState({
-    homework: "test",
-    homeworkSolution: "Solved",
-    quiz: "pass",
-  });
+  const handleClose = () => {
+    setOpen(false);
+  };
 
- 
+  const handleClickOpendetail = () => {
+    setOpendetails(true);
+  };
 
-  return <Container><div><h1>Courses page</h1>
-    <Row><Col>
-      <button type="button" className="btn btn-primary" onClick={
-        async () => {
-          setCourses(await CourseService.getCourses());
+  const handleClosedetail = () => {
+    setOpendetails(false);
+  };
+  const handleClickOpengrade = () => { 
+    setOpengrade(true);
+  };
 
-        }
-      }>Display All Courses</button></Col>
-    </Row>
-    <br />
-    <Row>
-      {courses.map((course) => {
-        return <Col lg={12}><Card >
-          {/* <Card.Img variant="top" src="https://via.placeholder.com/30x30" /> */}
-          <Card.Body>
-            <Card.Title>Course Name</Card.Title>
-            <Card.Text><CourseDetails course={course} />
-            </Card.Text>
-            <Button variant="primary" onClick={
-                async (course) => {
-                setCourseModalShow(true);
-                setCourseModalData(await CourseContentService.getCourseContent(course.id));
-                console.log(await CourseContentService.getCourseContent("9Qp7uq03V7PB0GKpzHcr"));
-                console.log(course.id);
-              }
-            }>
-              Course Contents  
-            </Button>
-            &nbsp;&nbsp;
-            <Button variant="primary" onClick={() => setAssignmentModalShow(true)}>
-              Assignments
-            </Button>
-            &nbsp;&nbsp;
-            <Button variant="primary" onClick={() => setGradeModalShow(true)}>
-              Grade
-            </Button>
-            <GradeModal show={gradeModalShow} data={gradeModalData} onHide={() => setGradeModalShow(false)} />
-            <AssignmentModal show={assignmentModalShow} data={assignmentModalData} onHide={() => setAssignmentModalShow(false)} />
-            <CourseDetailsModal show={courseModalShow} data={courseModalData} onHide={() => setCourseModalShow(false)} />
-          </Card.Body>
-        </Card></Col>
-      })}
-    </Row>
-    <Row>
-   
-    </Row>
-    <br />
-  </div></Container>
-}
-const CourseDetails = (props) => {
-  const [newAssignment, setNewAssignment] = useState({
-    title: "",
-    description: "",
-    content: "",
-    type: 0,
-    is_assignment:"",
-    deadline:""
-});
-const newAssignmentChanged = (e) => {
-  setNewAssignment({...newAssignment, [e.target.name]: e.target.value});
-}
-  const course = props.course;
+  const handleClosegrade = () => {
+    setOpengrade(false);
+  };
+
+  const addorEdit = (e) => {
+    if (currentId === '') {
+      //create function
+      courseService.createCourse(e).then(() => {
+        console.log("created new item successfully!")
+
+      }).catch((e) => {
+        console.log("failled to create a new course")
+      });
+    } else
+      //update
+      courseService.updateCourse(currentId, e).then(() => {
+        console.log("course Updated successfully")
+      }).catch((e) => {
+        console.log(e)
+      })
+    setCurrentId('')
+
+  }
   return (
-    <div>
-      <span >ID: {course.id}</span>
-      <span>Title: {course.title}</span>
-      <span>Course Code: {course.course_code}</span>
-      <span>Session Code: {course.session_code}</span>
-      <h3>Add Assignment</h3>
-     <form>
-         <input type="text" placeholder="title" name="title" onChange={newAssignmentChanged} />
-         <input type="text" placeholder="description" name="description" onChange={newAssignmentChanged} /><br/>
-         <input type="text" placeholder="content" name="content" onChange={newAssignmentChanged} />
-         <input type="number" placeholder="type" name="type" defaultValue="0" onChange={newAssignmentChanged} /><br/><br/>
-         <input type="number" placeholder="Is assignment" name="is_assignment" defaultValue="0" onChange={newAssignmentChanged} /><br/><br/>
-         <input type="text" placeholder="deadline" name="deadline"  onChange={newAssignmentChanged} /><br/><br/>
-         <button className="btn btn-secondary" onClick={async (e) => {
-             e.preventDefault();
-             alert("Assignment Created");
-             console.log("Assignment created with ID: " + await AssignmentService.addAssignment(course.id,newAssignment));
-         }}>Create Assignment</button>
-     </form><br/>
-     
+
+    <div className={classes.root}>
+
+      {course.map((courseitem) => (
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
+
+          <Grid item xs={12} >
+            <Card>
+              <CardHeader
+                title={`Course : ${courseitem.title}`}
+
+              />
+              <CardContent>
+                {courseitem.course_code}
+              </CardContent>
+              <CardContent>
+                {courseitem.semester_code}
+              </CardContent>
+              <CardContent>
+              <Button variant="outlined" color="primary" onClick={handleClickOpendetail}>
+                  Course Detail
+                </Button>
+                <Dialog open={opendetails} onClose={handleClosedetail} aria-labelledby="form-dialog-title"
+                   >
+                  <DialogTitle id="form-dialog-detail">  Course Detail</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+
+                    <CourseDetail  />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClosedetail} color="primary">
+                      Cancel
+                    </Button>
+
+                  </DialogActions>
+                </Dialog>
+              </CardContent>
+              <CardContent>
+                <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                  Add Assignment
+                </Button>
+                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                  <DialogTitle id="form-dialog-assignment">  Add or Edit Page</DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+
+                    <Courseform {...({ addorEdit, currentId, course })} />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                      Cancel
+                    </Button>
+
+                  </DialogActions>
+                </Dialog>
+              </CardContent>
+              <CardContent>
+              <Button variant="outlined" color="primary" onClick={handleClickOpengrade}>
+                  Grade
+                </Button>
+                <Dialog open={opengrade} onClose={handleClosegrade} aria-labelledby="form-dialog-title">
+                  <DialogTitle id="form-dialog-grade">  Grade </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+
+                    </DialogContentText>
+
+                    <Gradeform {...({ addorEdit, currentId, course })} />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClosegrade} color="primary">
+                      Cancel
+                    </Button>
+
+                  </DialogActions>
+                </Dialog>
+              </CardContent>
+            </Card>
+          </Grid>
+
+        </Grid>
+      ))}
     </div>
-    
-  )
+  );
 }
-
-
-export default Courses

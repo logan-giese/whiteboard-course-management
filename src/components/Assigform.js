@@ -1,18 +1,20 @@
 import React ,{useState, useEffect} from 'react'
 
 
-const Gradeform =(props)=> {
+const Courseform =(props)=> {
     const initialvalues ={
-      SubmissionID: "",
+      title: "",
       course_code: "",
       semester_code : "",
-      gpa: "",
+      session_code: "",
+      isAssignment:""
     } 
     var [values, setValues] = useState({
-      submissionID: "",
+      title: "",
       course_code: "",
       semester_code : "",
-      gpa: "",
+      session_code: "",
+      isAssignment:""
     })
     useEffect(()=>{
         if(props.currentId ==='')
@@ -46,7 +48,7 @@ const Gradeform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="SubmissionID" name="title" value = {values.submissionID} onChange ={ handleInputChnage}/>
+          <input className ="form-control" placeholder ="Course title" name="title" value = {values.title} onChange ={ handleInputChnage}/>
       </div>
       <div className="form-row">
       <div className ="form-group input-group col-md-6">
@@ -69,7 +71,10 @@ const Gradeform =(props)=> {
            onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group">
-          <input className ="form-control" placeholder ="GPA" name="gpa" value={values.gpa} onChange ={ handleInputChnage}/>
+          <input className ="form-control" placeholder ="Session Code" name="session_code" value={values.session_code} onChange ={ handleInputChnage}/>
+      </div>
+      <div className ="form-group">
+          <input className ="form-control" placeholder ="Assignment" name="isAssignment" value={values.isAssignment} onChange ={ handleInputChnage}/>
       </div>
      
       </div>
@@ -82,4 +87,4 @@ const Gradeform =(props)=> {
   );
 }
 
-export default Gradeform
+export default Courseform

@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import * as ReactBootStrap from "react-bootstrap";
 import About from "./components/About";
 import Profile from "./components/Profile";
 import Courses from "./components/Courses";

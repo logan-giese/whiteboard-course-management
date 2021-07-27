@@ -1,40 +1,14 @@
-import React from 'react'
-import { Container, Button, Row, Col,Modal } from 'react-bootstrap';
-//import CourseService from '../services/courseService';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React ,{useState, useEffect} from 'react'
 
-const CourseDetailsModal=(props)=> {
-    return (
-      <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Course Details
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="show-grid">
-          <Container>
-            <Row>
-              <Col xs={12} md={8}>
-               {props.data.title}
-              </Col>
-              </Row>
-              <Row>
-              <Col xs={6} md={4}>
-              {props.data.homeworkSolution}
-              </Col>
-            </Row>
 
-            <Row>
-              <Col xs={6} md={4}>
-              {props.data.quiz}
-              </Col>
-            </Row>
-          </Container>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
-    );
+const CourseDetail=()=> {
+      return ( <div><h2 id="simple-modal-title">Details of Course </h2>
+    <p id="simple-modal-description">
+     All the detail syllables and info here .
+    </p></div>
+            
+    
+  );
 }
-export default CourseDetailsModal
+
+export default CourseDetail
