@@ -16,9 +16,8 @@ function App({ handleLogout, user }) {
   return (
     <BrowserRouter>
       <div className="Container">
-        <h1 className="m-3 d-flex justify-content-center">OC BLACKBOARD</h1>
-        <button onClick={handleLogout}>Logout</button>
-        <Navigation />
+        <h1 className="m-3 d-flex justify-content-center">WHITEBOARD</h1>
+        <Navigation user={user} handleLogout={handleLogout} />
         <div className="route">
           <Switch>
             <Route path="/" component={Home} exact />

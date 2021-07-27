@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 const Login = (props) => {
   const {
     email,
     setEmail,
     confirmPassword,
     setConfirmPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     confirmPasswordError,
     password,
     setPassword,
     forgotPassword,
     setForgotPassword,
     handleLogin,
-    handlesignUp,
+    handleSignUp,
     hasAccount,
     setHasAccount,
     emailError,
     passwordError,
+    nameError,
     resetPassword,
     loading,
-    setLoading,
-    user,
-    setUser
   } = props;
 
   return (
@@ -41,7 +43,7 @@ const Login = (props) => {
         {forgotPassword ? (
           <div>
             <button className="resetbtn" onClick={() => resetPassword(email)}>
-              {loading ? "Sending email.." : "Reset"}
+              {loading ? "Sending email..." : "Reset"}
             </button>
             <button onClick={() => setForgotPassword(!setForgotPassword)}>
               Back
@@ -69,13 +71,28 @@ const Login = (props) => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <p className="errorMsg">{confirmPasswordError}</p>
+                <label>First Name</label>
+                <input
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <p className="errorMsg">{nameError}</p>
               </div>
             )}
             <div className="btnContainer">
               {hasAccount ? (
                 <>
                   <button onClick={handleLogin}>
-                    {loading ? "Signing in.." : "Sign In"}
+                    {loading ? "Signing in..." : "Sign In"}
                   </button>
                   <p>
                     {" "}
@@ -91,8 +108,8 @@ const Login = (props) => {
                 </>
               ) : (
                 <>
-                  <button onClick={handlesignUp}>
-                    {loading ? "Creating Account.." : "Sign Up"}
+                  <button onClick={handleSignUp}>
+                    {loading ? "Creating Account..." : "Sign Up"}
                   </button>
                   <p>
                     {" "}
