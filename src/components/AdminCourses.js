@@ -10,10 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Courseform from './Courseform';
 
-
-function Courses() {
- 
-
+function AdminCourses() {
     const [course, setCourse] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [open, setOpen] = useState(false);
@@ -61,10 +58,7 @@ function Courses() {
     }
     
   return (
-       
     <div className="table">
-    
-    
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Add Course
       </Button>
@@ -121,4 +115,4 @@ function Courses() {
   )
 }
 
-export default Courses
+export default AdminCourses;

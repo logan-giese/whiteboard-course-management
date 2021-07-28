@@ -1,20 +1,19 @@
-import React, { Component }  from 'react';
-import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import * as ReactBootStrap from 'react-bootstrap'
-import About from './components/About'
-import Profile from './components/Profile'
-import Courses from './components/AdminCourses'
-import Assignments from './components/ProfessorAssignmentsCRUD'
-import Messages from './components/Messages'
-import Home from './components/Home'
-import ServiceTestPage from './components/test/ServiceTestPage'
-import {Navigation} from './components/Navigation'
-import logo from './logo.svg';
-import Users from './components/Users';
-import StudentCourseView from './components/StudentCourseView';
-import StudentCourse from './components/StudentCourse'
-import CourseCards from './components/CourseCards'
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import * as ReactBootStrap from "react-bootstrap";
+import About from "./components/About";
+import Profile from "./components/Profile";
+import Courses from "./components/Courses";
+import AdminCourses from "./components/AdminCourses";
+import Assignments from "./components/ProfessorAssignmentsCRUD";
+import Messages from "./components/Messages";
+import Home from "./components/Home";
+import ServiceTestPage from "./components/test/ServiceTestPage";
+import { Navigation } from "./components/Navigation";
+import StudentCourseView from "./components/StudentCourseView";
+import StudentCourse from "./components/StudentCourse";
+import CourseCards from "./components/CourseCards";
 
 function App({ handleLogout, user }) {
   return (
@@ -30,9 +29,9 @@ function App({ handleLogout, user }) {
             <Route path="/profile" component={Profile} />
             <Route path="/courses" component={Courses} />
             <Route path="/assignments" component={Assignments} />
-            <Route path='/studentCourseView' component={StudentCourseView} />
-            <Route path='/studentCourse' component={StudentCourse} />
-            <Route path='/courseCards' component={CourseCards} />
+            <Route path="/studentCourseView" component={StudentCourseView} />
+            <Route path="/studentCourse" component={StudentCourse} />
+            <Route path="/courseCards" component={CourseCards} />
             <Route path="/messages" component={Messages} />
             <Route path="/service-tests" component={ServiceTestPage} />
           </Switch>

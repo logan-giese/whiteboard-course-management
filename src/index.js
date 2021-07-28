@@ -1,14 +1,12 @@
-// Import React dependencies
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
-
 import './index.css';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import OpeningPage from './OpeningPage';
+
 // Render the app
-ReactDOM.render((
-  <BrowserRouter>
-    <App />
-    </BrowserRouter>),
-  document.getElementById('root'));
+ReactDOM.render(
+  <React.StrictMode>
+    <OpeningPage />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
