@@ -1,10 +1,10 @@
-const login = () => {
+export const login = () => {
     return {
         type: 'LOGIN'
     };
 };
 
-const logout = () => {
+export const logout = () => {
     return {
         type: 'LOGOUT'
     };

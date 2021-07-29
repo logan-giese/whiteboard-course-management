@@ -4,6 +4,8 @@ import Login from "./components/Login";
 import App from "./App";
 import "./App.css";
 import UserService from "./services/userService";
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from "./actions";
 
 const OpeningPage = () => {
   const [user, setUser] = useState(null);
@@ -20,6 +22,8 @@ const OpeningPage = () => {
   const [hasAccount, setHasAccount] = useState(true);
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
+  const person = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   const clearInputs = () => {
     setEmail("");
@@ -179,6 +183,7 @@ const OpeningPage = () => {
           );
         } else if (user) {
           // Main app page
+          dispatch(login(user));
           return <App handleLogout={handleLogout} user={user} />;
         } else {
           // Login page

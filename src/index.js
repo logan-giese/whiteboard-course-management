@@ -24,9 +24,9 @@ const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && wi
 // Render the app
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-  {/* <React.StrictMode>
     <OpeningPage />
+  {/* <React.StrictMode>
+    < />
   </React.StrictMode>, */}
   </Provider>,
   document.getElementById('root')
