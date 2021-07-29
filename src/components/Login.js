@@ -27,7 +27,7 @@ const Login = (props) => {
     <section className="login">
       <div className="loginContainer">
         <h1 className="head" align="center">
-          Welcome{" "}
+          Welcome{"User Name "}
         </h1>
         <label>Email</label>
         <input
