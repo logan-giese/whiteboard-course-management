@@ -26,6 +26,7 @@ const OpeningPage = () => {
     setPasswordError("");
     setConfirmPasswordError("");
   };
+  
   const handleLogin = () => {
     setLoading(true);
     clearErrors();
@@ -37,6 +38,7 @@ const OpeningPage = () => {
         setUser(user);
         clearInputs();
       })
+      
       .catch((err) => {
         setLoading(false);
         switch (err.code) {
