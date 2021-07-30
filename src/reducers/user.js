@@ -1,22 +1,19 @@
-const def =
-  {email: "denden@banks.com",
-  first_name: "Denny ",
-  last_name: "Banks",
-  role: "1" } 
+const def = {
+  email: "default@test.com",
+  first_name: "Default",
+  last_name: "User",
+  role: "0",
+};
 
 const user = (state = def, action) => {
-    switch (action.type) {
-      case 'LOGIN':
-        return state;
-      case 'LOGOUT':
-        return state = null; 
-      default:
-        return state =     
-         {email: "denden@banks.com",
-         first_name: "Denny ",
-         last_name: "Banks",
-         role: "1" }    
-    }
+  switch (action.type) {
+    case "LOGIN":
+      return (state = action.payload);
+    case "LOGOUT":
+      return (state = {});
+    default:
+      return state;
   }
-  export default user
+};
 
+export default user;

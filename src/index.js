@@ -3,31 +3,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
-//Import Redux items
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import allReducers from './reducers'
-import { composeWithDevTools } from 'redux-devtools-extension';
-
+// Import Redux items
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import allReducers from './reducers';
 
 // Main app files
 import './index.css';
 import OpeningPage from './OpeningPage';
-import App from './App';
 
-//Redux stuff
-//setting up store with middleware and redux dev tools viewers
-const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  // other store enhancers if any
+// Redux setup
+// Setting up store with middleware and redux dev tools viewers
+const store = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 // Render the app
 ReactDOM.render(
   <Provider store={store}>
     <OpeningPage />
-  {/* <React.StrictMode>
-    < />
-  </React.StrictMode>, */}
   </Provider>,
   document.getElementById('root')
 );

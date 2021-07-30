@@ -4,8 +4,8 @@ import Login from "./components/Login";
 import App from "./App";
 import "./App.css";
 import UserService from "./services/userService";
-import { useSelector, useDispatch } from 'react-redux'
-import { login } from "./actions";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "./actions";
 
 const OpeningPage = () => {
   const [user, setUser] = useState(null);
@@ -47,8 +47,10 @@ const OpeningPage = () => {
       .signInWithEmailAndPassword(email, password)
       .then((userInfo) => {
         // Get user data from Firestore
-        UserService.getUserById(userInfo.user.uid).then((user) => {
-          setUser({ ...user, id: userInfo.user.uid });
+        UserService.getUserById(userInfo.user.uid).then((userData) => {
+          const user = { ...userData, id: userInfo.user.uid };
+          setUser(user);
+          dispatch(login(user));
           setLoading(false);
           clearInputs();
         });
@@ -108,7 +110,9 @@ const OpeningPage = () => {
           role: 0,
         };
         UserService.createUser(newUser, userInfo.user.uid).then((id) => {
-          setUser({ ...newUser, id: id });
+          const user = { ...newUser, id: id };
+          setUser(user);
+          dispatch(login(user));
           setLoading(false);
           clearInputs();
         });
@@ -141,14 +145,17 @@ const OpeningPage = () => {
 
   const handleLogout = () => {
     firebase.auth().signOut();
+    dispatch(logout());
   };
 
   const authListener = () => {
     firebase.auth().onAuthStateChanged((userInfo) => {
       if (userInfo) {
         clearInputs();
-        UserService.getUserById(userInfo.uid).then((user) => {
-          setUser({ ...user, id: userInfo.uid });
+        UserService.getUserById(userInfo.uid).then((userData) => {
+          const user = { ...userData, id: userInfo.uid };
+          setUser(user);
+          dispatch(login(user));
           setPageLoading(false);
         });
       } else {
@@ -183,7 +190,6 @@ const OpeningPage = () => {
           );
         } else if (user) {
           // Main app page
-          dispatch(login(user));
           return <App handleLogout={handleLogout} user={user} />;
         } else {
           // Login page
