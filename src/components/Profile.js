@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom';
+import { useSelector } from 'react-redux'
 
-class Profile extends Component {
-  render() {
+function Profile () { 
+    const user = useSelector(state => state.user)
     return (
       <form>
         <h1>My Profile</h1>
         <h2>Basic Information</h2>
-        <p>Name : Gopi Krishna</p>
-        <p>email : g.yerabati@eagles.oc.edu</p>
-        <p>Student ID : 1001677986</p>
+        <p>Name : {user.first_name} {user.last_name}</p>
+        <p>Email : {user.email}</p>
+        <p>Role : {user.role}</p>
       </form>
     );
-  }
 }
+
 export default Profile
