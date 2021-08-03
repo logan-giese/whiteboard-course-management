@@ -33,7 +33,6 @@ const Courses = () => {
       <button type="button" className="btn btn-primary" onClick={
         async () => {
           setCourses(await CourseService.getCourses());
-
         }
       }>Display All Courses</button></Col>
     </Row>
@@ -69,18 +68,18 @@ const CourseDetails = (props) => {
   const course = props.course;
   return (
     <div>
-      <span >ID: {course.id}</span>
+      <span>ID: {course.id}</span>
       <span>Title: {course.title}</span>
       <span>Course Code: {course.course_code}</span>
       <span>Session Code: {course.session_code}</span>
-     
+
       {/* <ul>
         {course.content.id}
         {course.content.title}
         {course.content.description}
         {course.content.content}
       </ul> */}
-    
+
       {/* <ul>
       {course.content.deadline}
       {course.content.submissions}
@@ -88,8 +87,5 @@ const CourseDetails = (props) => {
     </div>
   )
 }
- 
- 
 
-
-export default Courses
+export default Courses;

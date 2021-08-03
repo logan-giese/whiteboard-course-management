@@ -35,4 +35,5 @@ const Assignment=(props)=> {
       </Modal>
     );
 }
-export default Assignment
+
+export default Assignment;
