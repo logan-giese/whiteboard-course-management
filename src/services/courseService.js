@@ -30,14 +30,14 @@ const CourseService = {
     getCoursesById: async (ids) => {
         const db = firebase.firestore();
         
-        const refs = ids.map(id => db.collection('courses').doc(id));
-        const courses = await db.getAll(...refs);
-        return courses.map((course) => {
-            return {
-                id: course.id,
-                ...course.data()
-            }
-        });
+        const getDocs = ids.map((id) =>
+            db.collection("courses").doc(id).get()
+                .then((doc) => {
+                    return { id: id, ...doc.data() };
+                })
+        );
+        return await Promise.all(getDocs);
+        // Could have used db.getAll(...refs), but it's unsupported by this Firebase client
     },
     
     // Create a new course with the provided data and return the ID

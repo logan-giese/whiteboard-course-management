@@ -1,19 +1,12 @@
 import React ,{useState, useEffect} from 'react'
+import TextField from '@material-ui/core/TextField';
 
-
-const Gradeform =(props)=> {
+const AssignmentForm =(props)=> {
     const initialvalues ={
-      SubmissionID: "",
-      course_code: "",
-      semester_code : "",
-      gpa: "",
+        title: "",
+        description: "",
     } 
-    var [values, setValues] = useState({
-      submissionID: "",
-      course_code: "",
-      semester_code : "",
-      gpa: "",
-    })
+    var [values, setValues] = useState({title: "", description: "",})
     useEffect(()=>{
         if(props.currentId ==='')
         setValues({
@@ -21,21 +14,18 @@ const Gradeform =(props)=> {
         })
         else
         setValues({
-            ...props.course[props.currentId]
+            ...props.assignment[props.currentId]
         })
-        
-    },[props.currentId,props.course])
-
+    },[props.currentId,props.user])
     const handleInputChnage = e=>{
-        var {name, value} =e.target
+        var {title, value} =e.target
         setValues({
             ...values,
-            [name]: value        })
+            [title]: value        })
     }
     const handleFormSubmit =e =>{
         e.preventDefault();
         props.addorEdit(values);
-        
     }
     return (
       <form autoComplete ="off" onSubmit ={handleFormSubmit}>
@@ -46,7 +36,7 @@ const Gradeform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="SubmissionID" name="title" value = {values.submissionID} onChange ={ handleInputChnage}/>
+          <input className ="form-control" placeholder ="title" title="title" value = {values.title} onChange ={ handleInputChnage}/>
       </div>
       <div className="form-row">
       <div className ="form-group input-group col-md-6">
@@ -56,7 +46,7 @@ const Gradeform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="Course Code" name="course_code" value = {values.course_code}  onChange ={handleInputChnage}/>
+          <input className ="form-control" placeholder ="description" title="description" value = {values.description}  onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group input-group col-md-6">
           <div className ="input-group-prepend">
@@ -65,21 +55,16 @@ const Gradeform =(props)=> {
                     </i>  
               </div>
           </div>
-          <input className ="form-control" placeholder ="Semester Code" name="semester_code" value = {values.semester_code}
-           onChange ={handleInputChnage}/>
       </div>
       <div className ="form-group">
-          <input className ="form-control" placeholder ="GPA" name="gpa" value={values.gpa} onChange ={ handleInputChnage}/>
+          <textarea className ="form-control" placeholder ="content" title="content" value={values.content } onChange ={ handleInputChnage}/>
       </div>
-     
       </div>
       <div className ="form-group">
           <input type= "submit" value ="Save" className ="btn btn-primary btn-block"/>
       </div>
       </form>
-        
-    
   );
 }
 
-export default Gradeform
+export default AssignmentForm

@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect  }  from 'react';
 import {
   Box,
@@ -10,32 +9,31 @@ import {
   Grid,
   input
 } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import UserService from '../services/userService';
-import UserServiceTest from './test/UserServiceTest';
-
-
 
 const Profile = (props) => {
+  const user = useSelector(state => state.user);
+  
   const [values, setValues] = useState({
       first_name: "",
       last_name: "",
       email: "",
       role: 0,
-  } );
+  });
+  
   useEffect(() => {
-    UserService.getUserById("IVgTk03HogEQyQrlK2MJ").then((values) => {
-      setValues(values);
-    });
+    setValues(user);
   }, []);
-  const handleSubmit =e =>{
+  
+  const handleSubmit = e => {
     e.preventDefault();
-    UserService.updateUser("IVgTk03HogEQyQrlK2MJ",values).then(()=>{
-      console.log("user Updated successfully")
-    }).catch((e)=>{
-      console.log(e)
+    UserService.updateUser(user.id, values).then(() => {
+      console.log("User updated successfully");
+    }).catch((e) => {
+      console.log(e);
     })
- 
-}
+  }
 
   const handleChange = (event) => {
     setValues({
@@ -45,12 +43,19 @@ const Profile = (props) => {
   };
 
   return (
-    
+    <div>
+      <form>
+        <h1>Profile</h1>
+        <h2>Basic Information</h2>
+        <p>Name : {user.first_name} {user.last_name}</p>
+        <p>Email : {user.email}</p>
+        <p>Role : {user.role}</p>
+      </form>
+      <br />
       <Card style={{backgroundColor: ""}}>
         <CardHeader
           subheader="The information can be edited"
           title="Profile"
-          
         />
         <Divider />
         <CardContent>
@@ -64,9 +69,7 @@ const Profile = (props) => {
               xs={12}
             >
               <input
-                
                 helpertext="Please specify the first name"
-               
                 name="first_name"
                 onChange={handleChange}
                 required
@@ -80,8 +83,6 @@ const Profile = (props) => {
               xs={12}
             >
               <input
-             
-              
                 name="last-name"
                 onChange={handleChange}
                 required
@@ -95,8 +96,6 @@ const Profile = (props) => {
               xs={12}
             >
               <input
-                
-               
                 name="email"
                 onChange={handleChange}
                 required
@@ -110,8 +109,6 @@ const Profile = (props) => {
               xs={12}
             >
               <input
-                
-            
                 name="role"
                 onChange={handleChange}
                 type="number"
@@ -119,8 +116,6 @@ const Profile = (props) => {
                 variant="outlined"
               />
             </Grid>
-            
-            
           </Grid>
         </CardContent>
         <Divider />
@@ -141,7 +136,7 @@ const Profile = (props) => {
           </Button>
         </Box>
       </Card>
-    
+    </div>
   );
 };
 
