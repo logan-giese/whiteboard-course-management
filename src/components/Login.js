@@ -1,33 +1,45 @@
-import React, { useState } from "react";
+import React from "react";
+
 const Login = (props) => {
   const {
     email,
     setEmail,
     confirmPassword,
     setConfirmPassword,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     confirmPasswordError,
     password,
     setPassword,
     forgotPassword,
     setForgotPassword,
     handleLogin,
-    handlesignUp,
+    handleSignUp,
     hasAccount,
     setHasAccount,
     emailError,
     passwordError,
+    nameError,
     resetPassword,
     loading,
-    setLoading,
-    user,
-    setUser
   } = props;
+
+  const handleKeypress = e => {
+  if (e.charCode === 13) {
+    if (hasAccount)
+      handleLogin();
+    else
+      handlesignUp();
+  }
+  };
 
   return (
     <section className="login">
       <div className="loginContainer">
         <h1 className="head" align="center">
-          Welcome{"User Name "}
+          Welcome{" "}
         </h1>
         <label>Email</label>
         <input
@@ -36,12 +48,13 @@ const Login = (props) => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyPress={handleKeypress}
         />
         <p className="errorMsg">{emailError}</p>
         {forgotPassword ? (
           <div>
             <button className="resetbtn" onClick={() => resetPassword(email)}>
-              {loading ? "Sending email.." : "Reset"}
+              {loading ? "Sending email..." : "Reset"}
             </button>
             <button onClick={() => setForgotPassword(!setForgotPassword)}>
               Back
@@ -55,6 +68,7 @@ const Login = (props) => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeypress}
             />
             <p className="errorMsg">{passwordError}</p>
             {hasAccount ? (
@@ -67,15 +81,31 @@ const Login = (props) => {
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  onKeyPress={handleKeypress}
                 />
                 <p className="errorMsg">{confirmPasswordError}</p>
+                <label>First Name</label>
+                <input
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <p className="errorMsg">{nameError}</p>
               </div>
             )}
-            <div className="btnContainer">
+            <div className="btnContainer" >
               {hasAccount ? (
                 <>
-                  <button onClick={handleLogin}>
-                    {loading ? "Signing in.." : "Sign In"}
+                  <button onClick={handleLogin} type="submit">
+                    {loading ? "Signing in..." : "Sign In"}
                   </button>
                   <p>
                     {" "}
@@ -91,8 +121,8 @@ const Login = (props) => {
                 </>
               ) : (
                 <>
-                  <button onClick={handlesignUp}>
-                    {loading ? "Creating Account.." : "Sign Up"}
+                  <button onClick={handleSignUp}>
+                    {loading ? "Creating Account..." : "Sign Up"}
                   </button>
                   <p>
                     {" "}

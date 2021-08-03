@@ -20,15 +20,14 @@ button {
   color: rgb(233, 229, 229);
   font-size: 16px;
   letter-spacing: 1px;
-  background:#350707;
+  background: linear-gradient(to right, #63615e, #ec753d);
   cursor: pointer;
 }
 
 button:hover{
-  background: #DC2424;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #4A569D, #DC2424);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #4A569D, #DC2424); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: rgb(226, 220, 220);
+  background: linear-gradient(to right, #f7980b, #ab3815); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: rgb(20, 19, 19);
 }
 
 /* Login page styling */
@@ -37,12 +36,12 @@ button:hover{
   width: 100%;
   min-height: 100vh;
   padding: 0 20px;
-  background: #DC2424;  /* fallback for old browsers */
+  background-image: url(./Images/bg.jpg); 
   display: flex;
 }
 
 .head{
-  color:#ddcaca;
+  color:#1e1d1d;
   font-size: 30px;
   margin-bottom: 40px;
 }
@@ -56,13 +55,12 @@ button:hover{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgb(19, 18, 18);
-  box-shadow: 0 50px 70px -20px rgba(238, 226, 226, 0.8);
+  background: linear-gradient(to right, #ffc464, #ecb073);
   transition: 0.6s;
 }
 
 .login .loginContainer label {
-  color:#dfcece;
+  color:#191717;
   margin: 14px 0;
   display: block;
   font-size: 22px;
@@ -92,8 +90,8 @@ button:hover{
 }
 
 .login .loginContainer .btnContainer p span {
-  color:red;
-  font-weight: 500;
+  color:rgb(233, 118, 10);
+  font-weight: 600;
   letter-spacing: 0.5px;
   margin-left: 5px;
   cursor: pointer;
@@ -101,11 +99,11 @@ button:hover{
 }
 
 .login .loginContainer .btnContainer p span:hover {
-  color: red;
+  color: rgb(25, 23, 23);
 }
 
 .login .loginContainer .errorMsg {
-  color: red;
+  color: rgb(35, 33, 33);
   font-size: 16px;
 }
 
