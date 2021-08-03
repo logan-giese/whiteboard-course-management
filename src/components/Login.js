@@ -31,12 +31,11 @@ const Login = (props) => {
     if (hasAccount)
       handleLogin();
     else
-      handlesignUp();
+      handleSignUp();
   }
   };
 
   return (
-   
     <section className="login">
       <div className="loginContainer">
         <h1 className="head" align="center">
@@ -83,7 +82,6 @@ const Login = (props) => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   onKeyPress={handleKeypress}
-              
                 />
                 <p className="errorMsg">{confirmPasswordError}</p>
                 <label>First Name</label>
