@@ -40,12 +40,12 @@ const UserServiceTest = () => {
         <br/><br/>
         <h3>Users:</h3>
         {users.map((user) => {
-            // return <UserInfo key={user.id} user={user} />
+            return <UserInfo key={user.id} user={user} />
         })}
         
         {/* Get specific user test */}
         <h3>Specific User:</h3>
-        {/* <UserInfo user={specificUser} /> */}
+        <UserInfo user={specificUser} />
         
         {/* Add user test */}
         <h3>Add User:</h3>
@@ -78,28 +78,28 @@ const UserServiceTest = () => {
 }
 
 // User information test component (takes "user" property)
-// const UserInfo = (props) => {
-//     const user = props.user;
-//     return (
-//         <div>
-//             {/* ID: {user.id}<br/>
-//             Name: {user.first_name} {user.last_name}<br/>
-//             Email: {user.email}<br/>
-//             Role: {user.role}<br/>
-//             Enrolled Courses:
-//             <ul>
-//             {user.enrolled_courses?.map((course) => {
-//                 return <li key={course}>{course}</li>
-//             })}
-//             </ul>
-//             Assigned Courses:
-//             <ul>
-//             {user.assigned_courses?.map((course) => {
-//                 return <li key={course}>{course}</li>
-//             })} */}
-//             </ul><br/>
-//         </div>
-//     )
-// }
+const UserInfo = (props) => {
+    const user = props.user;
+    return (
+        <div>
+            ID: {user.id}<br/>
+            Name: {user.first_name} {user.last_name}<br/>
+            Email: {user.email}<br/>
+            Role: {user.role}<br/>
+            Enrolled Courses:
+            <ul>
+            {user.enrolled_courses?.map((course) => {
+                return <li key={course}>{course}</li>
+            })}
+            </ul>
+            Assigned Courses:
+            <ul>
+            {user.assigned_courses?.map((course) => {
+                return <li key={course}>{course}</li>
+            })}
+            </ul><br/>
+        </div>
+    )
+}
 
 export default UserServiceTest;
