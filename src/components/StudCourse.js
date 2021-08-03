@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import UserService from '../services/userService';
+import courseService from '../services/courseService';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Button from '@material-ui/core/Button';
@@ -8,24 +8,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Userform from './Userform';
+import Courseform from './Courseform';
 
 
-function Users() {
+function StudCourse() {
  
 
-    const [user, setUser] = useState([])
+    const [course, setCourse] = useState([])
     const [currentId, setCurrentId] = useState('')
     const [open, setOpen] = useState(false);
     
     useEffect(() => {
-      UserService.getUsers().then((users) => {
-        setUser(users);
+        
+      courseService.getCourses().then((courses) => {
+        setCourse(courses);
       });
     }, []);
     
     const handleClickOpen = (id) => {
-      setCurrentId(id)
+    setCurrentId(id)
    setOpen(true);
     };
   
@@ -34,7 +35,7 @@ function Users() {
     };
    const handaledelete =(id) =>{
      
-    UserService.deleteUser(id).then(()=>{
+    courseService.deleteCourse(id).then(()=>{
       
     }).catch((e)=>{
       console.log(e)
@@ -44,16 +45,16 @@ function Users() {
    const addorEdit = (e) =>{
        if(currentId ===''){
     //create function
-    UserService.createUser(e).then(()=>{
+    courseService.createCourse(e).then(()=>{
       console.log("created new item successfully!")
 
     }).catch((e)=>{
-      console.log("failled to create a new user")
+      console.log("failled to create a new course")
     });
         } else 
         //update
-        UserService.updateUser(e.id,e).then(()=>{
-          console.log("user Updated successfully")
+        courseService.updateCourse(e.id,e).then(()=>{
+          console.log("course Updated successfully")
         }).catch((e)=>{
           console.log(e)
         })
@@ -67,16 +68,16 @@ function Users() {
     
     
     <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        AddUser
+        Add Course
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+        <DialogTitle id="form-dialog-title">  Add or Edit Page</DialogTitle>
         <DialogContent>
           <DialogContentText>
-          Add or Edit page
+       
           </DialogContentText>
           
-        <Userform {...({addorEdit, currentId, user})}/>
+        <Courseform {...({addorEdit, currentId, course})}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
@@ -88,27 +89,26 @@ function Users() {
     <table className ="table table-borderless table-stripped">
         <thead className="thead-light">
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Role</th>
+                <th>Title</th>
+                <th>Course Code</th>
+                <th>Semester Code</th>
+                <th>Session Code</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
           {
-              
-              Object.keys(user).map(id =>{
+              Object.keys(course).map(id =>{
                   return < tr key={id}>
-                      <td>{user[id].first_name}</td>
-                      <td>{user[id].last_name}</td>
-                      <td>{user[id].email}</td>
-                      <td>{user[id].role}</td>
+                      <td>{course[id].title}</td>
+                      <td>{course[id].course_code}</td>
+                      <td>{course[id].semester_code}</td>
+                      <td>{course[id].session_code}</td>
                       <td>
                       <a className ="btn text-primary" onClick ={() => {setCurrentId(id)}}>
-                                        <CreateIcon onClick ={() => handleClickOpen(user[id].id)}/></a> 
+                                        <CreateIcon onClick ={() => handleClickOpen(course[id].id)}/></a> 
                                 <a className ='btn text-danger' >
-                                   <DeleteIcon onClick={() => handaledelete(user[id].id)}/>
+                                   <DeleteIcon onClick={() => handaledelete(course[id].id)}/>
                                 </a>
                         </td>
                         
@@ -122,4 +122,4 @@ function Users() {
   )
 }
 
-export default Users
+export default StudCourse

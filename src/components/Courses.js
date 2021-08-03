@@ -18,6 +18,7 @@ import { useHistory, Redirect } from 'react-router-dom'
 import Courseform from './Assigform';
 import Gradeform from './Grade';
 import CourseDetail from './CourseContent';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -66,9 +67,8 @@ export default function StudentCourse() {
       //create function
       courseService.createCourse(e).then(() => {
         console.log("created new item successfully!")
-
       }).catch((e) => {
-        console.log("failled to create a new course")
+        console.log("failed to create a new course")
       });
     } else
       //update
@@ -78,12 +78,10 @@ export default function StudentCourse() {
         console.log(e)
       })
     setCurrentId('')
-
   }
+
   return (
-
     <div className={classes.root}>
-
       {course.map((courseitem) => (
         <Grid
           container
@@ -92,12 +90,10 @@ export default function StudentCourse() {
           justify="flex-start"
           alignItems="flex-start"
         >
-
           <Grid item xs={12} >
             <Card>
               <CardHeader
                 title={`Course : ${courseitem.title}`}
-
               />
               <CardContent>
                 {courseitem.course_code}
@@ -116,14 +112,12 @@ export default function StudentCourse() {
                     <DialogContentText>
 
                     </DialogContentText>
-
                     <CourseDetail  />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClosedetail} color="primary">
                       Cancel
                     </Button>
-
                   </DialogActions>
                 </Dialog>
               </CardContent>
@@ -137,14 +131,12 @@ export default function StudentCourse() {
                     <DialogContentText>
 
                     </DialogContentText>
-
                     <Courseform {...({ addorEdit, currentId, course })} />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose} color="primary">
                       Cancel
                     </Button>
-
                   </DialogActions>
                 </Dialog>
               </CardContent>
@@ -158,20 +150,17 @@ export default function StudentCourse() {
                     <DialogContentText>
 
                     </DialogContentText>
-
                     <Gradeform {...({ addorEdit, currentId, course })} />
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClosegrade} color="primary">
                       Cancel
                     </Button>
-
                   </DialogActions>
                 </Dialog>
               </CardContent>
             </Card>
           </Grid>
-
         </Grid>
       ))}
     </div>
