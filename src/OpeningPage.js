@@ -55,6 +55,7 @@ const OpeningPage = () => {
           clearInputs();
         });
       })
+      
       .catch((err) => {
         setLoading(false);
         switch (err.code) {

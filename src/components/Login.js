@@ -1,4 +1,5 @@
 import React from "react";
+
 const Login = (props) => {
   const {
     email,
@@ -25,7 +26,17 @@ const Login = (props) => {
     loading,
   } = props;
 
+  const handleKeypress = e => {
+  if (e.charCode === 13) {
+    if (hasAccount)
+      handleLogin();
+    else
+      handlesignUp();
+  }
+  };
+
   return (
+   
     <section className="login">
       <div className="loginContainer">
         <h1 className="head" align="center">
@@ -38,6 +49,7 @@ const Login = (props) => {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          onKeyPress={handleKeypress}
         />
         <p className="errorMsg">{emailError}</p>
         {forgotPassword ? (
@@ -57,6 +69,7 @@ const Login = (props) => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyPress={handleKeypress}
             />
             <p className="errorMsg">{passwordError}</p>
             {hasAccount ? (
@@ -69,6 +82,8 @@ const Login = (props) => {
                   required
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
+                  onKeyPress={handleKeypress}
+              
                 />
                 <p className="errorMsg">{confirmPasswordError}</p>
                 <label>First Name</label>
@@ -88,10 +103,10 @@ const Login = (props) => {
                 <p className="errorMsg">{nameError}</p>
               </div>
             )}
-            <div className="btnContainer">
+            <div className="btnContainer" >
               {hasAccount ? (
                 <>
-                  <button onClick={handleLogin}>
+                  <button onClick={handleLogin} type="submit">
                     {loading ? "Signing in..." : "Sign In"}
                   </button>
                   <p>
