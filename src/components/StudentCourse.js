@@ -34,7 +34,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box'
-import HomePage from './Home'
 import Assignment from "./Assignment";
 import InputLabel from '@material-ui/core/InputLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -207,7 +206,7 @@ setContent(false)
           <Paper className ={classes.paper1}>
           {contentClick
         ? <Assignment />
-        : <HomePage />
+        : ""
       }
          </Paper>
          

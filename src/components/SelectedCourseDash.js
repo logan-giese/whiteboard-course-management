@@ -18,38 +18,32 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import NavItem from './NavItem';
 import Box from '@material-ui/core/Box'
-import homePage from "./Home"
 
 const drawerWidth = 240;
 const items = [
   {
     href: '/',
-    
-    title: 'Selected COurse'
+    title: 'Selected Course'
   },
   {
     href: '/profile',
-    
     title: 'Announcements'
   },
   {
     href: '/',
-    
     title: 'Course Content'
   },
   {
     href: '/',
-    
     title: 'Discussions'
   },
  
   {
     href: '/',
-    
     title: 'My Grade'
   },
- 
 ];
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -92,9 +86,6 @@ function ResponsiveDrawer(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  function homePage() {
-    return <homePage/>;
-  }
 
   const drawer = (
     <div>
