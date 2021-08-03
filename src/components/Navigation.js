@@ -27,6 +27,15 @@ export const Navigation = (props) => {
           <NavLink className="d-inline p-2 bg-dark text-white" to="/tools">
             Tools
           </NavLink>
+          <NavLink className = "d-inline p-2 bg-dark text-white" to ="/users">
+            Users
+          </NavLink>
+          <NavLink className = "d-inline p-2 bg-dark text-white" to ="/studentCourseView">
+            StudentCourse
+          </NavLink>
+          <NavLink className = "d-inline p-2 bg-dark text-white" to ="/assignments">
+            ProfAssignments
+          </NavLink>
         </Nav>
       </Navbar.Collapse>
       <div style={{ float: "right" }}>

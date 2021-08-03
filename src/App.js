@@ -5,12 +5,16 @@ import * as ReactBootStrap from 'react-bootstrap';
 import About from './components/About';
 import Profile from './components/Profile';
 import Courses from './components/Courses';
-import Assignments from "./components/Assignments";
+import AdminCourses from "./components/AdminCourses";
+import Assignments from "./components/ProfessorAssignmentsCRUD";
 import Messages from './components/Messages';
 import Tools from './components/Tools';
 import Home from './components/Home';
+import StudentCourseView from './components/StudentCourseView';
+import StudentCourse from './components/StudentCourse';
+import CourseCards from './components/CourseCards';
 import ServiceTestPage from './components/test/ServiceTestPage';
-import {Navigation} from './components/Navigation';
+import { Navigation } from './components/Navigation';
 
 function App({ handleLogout, user }) {
   return (
@@ -24,7 +28,10 @@ function App({ handleLogout, user }) {
             <Route path="/about" component={About} />
             <Route path="/profile" component={Profile} />
             <Route path="/courses" component={Courses} />
-            <Route path="/courses/assignments" component={Assignments} />
+            <Route path="/assignments" component={Assignments} />
+            <Route path="/studentCourseView" component={StudentCourseView} />
+            <Route path="/studentCourse" component={StudentCourse} />
+            <Route path="/courseCards" component={CourseCards} />
             <Route path="/messages" component={Messages} />
             <Route path="/tools" component={Tools} />
             <Route path="/service-tests" component={ServiceTestPage} />
