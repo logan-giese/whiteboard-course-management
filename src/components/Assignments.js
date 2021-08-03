@@ -10,7 +10,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AssignmentForm from './AssignmentForm';
 
-
+// Note: Looks like ProfessorAssignmentsCRUD.js is an updated copy of this
 function Assignments() {
     const [assignment, setAssignment] = useState([])
     const [currentId, setCurrentId] = useState('')

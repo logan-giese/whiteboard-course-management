@@ -6,8 +6,7 @@ import About from './components/About';
 import Profile from './components/Profile';
 import Courses from './components/Courses';
 import AdminCourses from "./components/AdminCourses";
-import Assignments from "./components/Assignments";
-import ProfessorAssignments from "./components/ProfessorAssignmentsCRUD";
+import Assignments from "./components/ProfessorAssignmentsCRUD";
 import Messages from './components/Messages';
 import Tools from './components/Tools';
 import Home from './components/Home';
@@ -29,8 +28,7 @@ function App({ handleLogout, user }) {
             <Route path="/about" component={About} />
             <Route path="/profile" component={Profile} />
             <Route path="/courses" component={Courses} />
-            <Route path="/courses/assignments" component={Assignments} />
-            <Route path="/assignments" component={ProfessorAssignments} />
+            <Route path="/assignments" component={Assignments} />
             <Route path="/studentCourseView" component={StudentCourseView} />
             <Route path="/studentCourse" component={StudentCourse} />
             <Route path="/courseCards" component={CourseCards} />
